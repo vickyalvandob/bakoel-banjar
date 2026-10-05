@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#6b3a20" />
+  <meta name="description" content="Tentang Bakoel Banjar — cerita, nilai, dan cita rasa khas Kalimantan yang dihadirkan dalam pengalaman makan yang hangat dan modern." />
+  <title>Tentang — Bakoel Banjar</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            banjar: {
+              50:'#fcf8f3',
+              100:'#f6eee5',
+              200:'#eadbc9',
+              300:'#dcbf9e',
+              400:'#c49268',
+              500:'#9f633b',
+              600:'#7f4829',
+              700:'#673920',
+              800:'#53301d',
+              900:'#2f1b12'
+            }
+          },
+          fontFamily: {
+            display:['Georgia','ui-serif','serif'],
+            sans:['Inter','ui-sans-serif','system-ui','sans-serif']
+          },
+          boxShadow:{
+            soft:'0 18px 60px rgba(70,42,25,.10)',
+            card:'0 12px 36px rgba(70,42,25,.08)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    html{scroll-behavior:smooth}
+    body{
+      background:
+        radial-gradient(circle at 8% 7%,rgba(196,146,104,.12),transparent 24%),
+        radial-gradient(circle at 90% 12%,rgba(127,72,41,.07),transparent 24%),
+        #fcf8f3;
+    }
+    .noise{
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.024'/%3E%3C/svg%3E");
+    }
+    .image-hover img{transition:transform .6s ease}
+    .image-hover:hover img{transform:scale(1.035)}
+  </style>
+</head>
+
+<body class="font-sans text-banjar-900 antialiased selection:bg-banjar-200">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 border-b border-banjar-200/80 bg-banjar-50/90 backdrop-blur-xl">
+    <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
+      <a href="bakoel-banjar-landing.html" class="flex items-center gap-3">
+        <div class="grid size-11 place-items-center rounded-2xl border border-banjar-200 bg-white shadow-sm">
+          <svg viewBox="0 0 48 48" class="size-7 fill-none stroke-banjar-700" stroke-width="2">
+            <path d="M7 22 24 9l17 13M12 20v18m24-18v18M8 38h32M16 38V27h16v11M18 17h12"/>
+          </svg>
+        </div>
+        <div class="leading-tight">
+          <div class="font-display text-xl font-bold">Bakoel Banjar</div>
+          <div class="text-[11px] tracking-wide text-stone-500">Masakan Khas Kalimantan</div>
+        </div>
+      </a>
+
+      <nav class="hidden items-center gap-8 text-sm font-medium text-stone-600 md:flex">
+        <a class="transition hover:text-banjar-700" href="bakoel-banjar-landing.html">Beranda</a>
+        <a class="transition hover:text-banjar-700" href="bakoel-banjar-menu.html">Menu</a>
+        <a class="transition hover:text-banjar-700" href="bakoel-banjar-layanan.html">Layanan</a>
+        <a class="font-semibold text-banjar-700" href="#tentang">Tentang</a>
+        <a class="transition hover:text-banjar-700" href="bakoel-banjar-kontak.html">Kontak</a>
+      </nav>
+
+      <a href="bakoel-banjar-menu.html"
+         class="inline-flex items-center gap-2 rounded-xl bg-banjar-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-banjar-800">
+        <i data-lucide="utensils" class="size-4"></i>
+        <span class="hidden sm:inline">Lihat Menu</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="tentang" class="noise overflow-hidden border-b border-banjar-200/70">
+    <div class="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[.95fr_1.05fr] lg:px-8 lg:py-24">
+      <div>
+        <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-banjar-200 bg-white/70 px-3 py-1.5 text-xs font-bold uppercase tracking-[.2em] text-banjar-700">
+          <span class="size-1.5 rounded-full bg-banjar-500"></span>
+          Tentang Bakoel Banjar
+        </div>
+
+        <h1 class="max-w-3xl font-display text-5xl font-bold leading-[.98] tracking-[-.04em] md:text-6xl lg:text-7xl">
+          Menjaga rasa Banjar tetap dekat dengan keseharian.
+        </h1>
+
+        <p class="mt-6 max-w-xl text-base leading-7 text-stone-600 md:text-lg">
+          Bakoel Banjar lahir dari keinginan sederhana: menghadirkan masakan khas Kalimantan yang hangat, familiar, dan bisa dinikmati siapa saja dalam suasana yang nyaman.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#cerita"
+             class="inline-flex items-center gap-2 rounded-xl bg-banjar-700 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-banjar-800">
+            Cerita Kami
+            <i data-lucide="arrow-down" class="size-4"></i>
+          </a>
+          <a href="bakoel-banjar-menu.html"
+             class="inline-flex items-center gap-2 rounded-xl border border-banjar-200 bg-white px-5 py-3 text-sm font-semibold text-banjar-900 transition hover:bg-banjar-100">
+            Jelajahi Menu
+          </a>
+        </div>
+
+        <div class="mt-10 grid max-w-2xl grid-cols-3 gap-4 border-t border-banjar-200 pt-6">
+          <div>
+            <div class="font-display text-3xl font-bold text-banjar-700">01</div>
+            <div class="mt-1 text-xs text-stone-500">Rasa Autentik</div>
+          </div>
+          <div>
+            <div class="font-display text-3xl font-bold text-banjar-700">02</div>
+            <div class="mt-1 text-xs text-stone-500">Bahan Pilihan</div>
+          </div>
+          <div>
+            <div class="font-display text-3xl font-bold text-banjar-700">03</div>
+            <div class="mt-1 text-xs text-stone-500">Suasana Hangat</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-hover relative overflow-hidden rounded-[2rem] border border-white/70 bg-banjar-200 shadow-soft">
+        <img
+          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=88"
+          alt="Suasana rumah makan Bakoel Banjar"
+          class="h-[520px] w-full object-cover lg:h-[600px]"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-banjar-900/58 via-transparent to-transparent"></div>
+        <div class="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/20 bg-banjar-900/62 p-5 text-white backdrop-blur-md">
+          <div class="text-xs font-bold uppercase tracking-[.18em] text-banjar-200">Bakoel Banjar</div>
+          <div class="mt-2 font-display text-2xl font-bold">Tradisional dalam rasa, modern dalam pengalaman.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section id="cerita">
+    <div class="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-[.8fr_1.2fr] lg:px-8">
+      <div>
+        <div class="text-xs font-bold uppercase tracking-[.22em] text-banjar-600">Cerita Kami</div>
+        <h2 class="mt-3 font-display text-4xl font-bold tracking-[-.03em] md:text-5xl">
+          Berangkat dari rasa yang ingin selalu dirindukan.
+        </h2>
+      </div>
+
+      <div class="space-y-6 text-base leading-8 text-stone-600">
+        <p>
+          Bakoel Banjar membawa inspirasi dari masakan khas Kalimantan, khususnya cita rasa Banjar yang kaya bumbu, hangat, dan dekat dengan suasana makan bersama.
+        </p>
+        <p>
+          Kami percaya makanan yang baik bukan hanya soal rasa, tetapi juga tentang pengalaman: duduk bersama, berbagi hidangan, dan menikmati waktu tanpa harus terasa rumit.
+        </p>
+        <p>
+          Karena itu, Bakoel Banjar dibangun dengan pendekatan yang sederhana — bahan yang baik, rasa yang kuat, pelayanan yang ramah, dan suasana yang nyaman untuk berbagai momen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="border-y border-banjar-200/70 bg-white/55">
+    <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+      <div class="mb-10 max-w-3xl">
+        <div class="text-xs font-bold uppercase tracking-[.22em] text-banjar-600">Yang Kami Jaga</div>
+        <h2 class="mt-3 font-display text-4xl font-bold tracking-[-.03em] md:text-5xl">
+          Tiga hal sederhana yang menjadi karakter Bakoel Banjar.
+        </h2>
+      </div>
+
+      <div class="grid gap-5 lg:grid-cols-3">
+        <article class="rounded-[1.6rem] border border-banjar-200 bg-white p-7 shadow-sm">
+          <div class="grid size-12 place-items-center rounded-2xl bg-banjar-100 text-banjar-700">
+            <i data-lucide="chef-hat" class="size-5"></i>
+          </div>
+          <h3 class="mt-6 font-display text-2xl font-bold">Rasa yang Berkarakter</h3>
+          <p class="mt-3 text-sm leading-7 text-stone-600">
+            Kami mempertahankan karakter masakan yang kaya rempah, gurih, pedas, dan akrab dengan selera Nusantara.
+          </p>
+        </article>
+
+        <article class="rounded-[1.6rem] border border-banjar-200 bg-white p-7 shadow-sm">
+          <div class="grid size-12 place-items-center rounded-2xl bg-banjar-100 text-banjar-700">
+            <i data-lucide="leaf" class="size-5"></i>
+          </div>
+          <h3 class="mt-6 font-display text-2xl font-bold">Bahan yang Dipilih</h3>
+          <p class="mt-3 text-sm leading-7 text-stone-600">
+            Setiap menu dibuat dengan perhatian pada kesegaran, kualitas bahan, dan keseimbangan rasa.
+          </p>
+        </article>
+
+        <article class="rounded-[1.6rem] border border-banjar-200 bg-white p-7 shadow-sm">
+          <div class="grid size-12 place-items-center rounded-2xl bg-banjar-100 text-banjar-700">
+            <i data-lucide="users" class="size-5"></i>
+          </div>
+          <h3 class="mt-6 font-display text-2xl font-bold">Momen Kebersamaan</h3>
+          <p class="mt-3 text-sm leading-7 text-stone-600">
+            Dari makan siang sampai acara keluarga, Bakoel Banjar dibuat untuk terasa hangat dan mudah dinikmati bersama.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE / IDENTITY -->
+  <section>
+    <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+      <div class="grid overflow-hidden rounded-[2rem] border border-banjar-200 bg-white lg:grid-cols-[1.05fr_.95fr]">
+        <div class="image-hover min-h-[460px] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1500&q=88"
+            alt="Hidangan Nusantara"
+            class="h-full w-full object-cover"
+          />
+        </div>
+
+        <div class="flex flex-col justify-center p-8 md:p-12 lg:p-14">
+          <div class="text-xs font-bold uppercase tracking-[.22em] text-banjar-600">Identitas Rasa</div>
+          <h2 class="mt-3 font-display text-4xl font-bold tracking-[-.03em] md:text-5xl">
+            Gami, bakar, goreng, dan hidangan yang terasa familiar.
+          </h2>
+          <p class="mt-5 leading-7 text-stone-600">
+            Menu Bakoel Banjar tidak dibuat untuk terasa rumit. Kami memilih hidangan yang mudah dinikmati, tetapi tetap punya karakter kuat melalui sambal, bumbu bakar, rempah, dan cita rasa khas Nusantara.
+          </p>
+
+          <div class="mt-7 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-xl bg-banjar-50 p-4">
+              <i data-lucide="flame" class="size-5 text-banjar-700"></i>
+              <div class="mt-3 text-sm font-semibold">Sambal Gami</div>
+              <div class="mt-1 text-xs leading-5 text-stone-500">Pedas, gurih, dan disajikan dengan karakter rasa yang kuat.</div>
+            </div>
+            <div class="rounded-xl bg-banjar-50 p-4">
+              <i data-lucide="drumstick" class="size-5 text-banjar-700"></i>
+              <div class="mt-3 text-sm font-semibold">Ayam & Bebek</div>
+              <div class="mt-1 text-xs leading-5 text-stone-500">Menu utama yang cocok untuk makan sehari-hari maupun bersama.</div>
+            </div>
+            <div class="rounded-xl bg-banjar-50 p-4">
+              <i data-lucide="fish" class="size-5 text-banjar-700"></i>
+              <div class="mt-3 text-sm font-semibold">Ikan & Seafood</div>
+              <div class="mt-1 text-xs leading-5 text-stone-500">Pilihan ikan dan seafood dengan rasa gurih, bakar, dan pedas.</div>
+            </div>
+            <div class="rounded-xl bg-banjar-50 p-4">
+              <i data-lucide="sprout" class="size-5 text-banjar-700"></i>
+              <div class="mt-3 text-sm font-semibold">Sayuran & Pelengkap</div>
+              <div class="mt-1 text-xs leading-5 text-stone-500">Menyeimbangkan hidangan utama dengan pilihan yang lebih ringan.</div>
+            </div>
+          </div>
+
+          <a href="bakoel-banjar-menu.html"
+             class="mt-8 inline-flex w-fit items-center gap-2 rounded-xl bg-banjar-700 px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-banjar-800">
+            Lihat Menu Lengkap
+            <i data-lucide="arrow-right" class="size-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="pb-20">
+    <div class="mx-auto max-w-7xl px-5 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-[.9fr_1.1fr]">
+        <div class="rounded-[1.8rem] bg-banjar-900 p-8 text-white md:p-10">
+          <div class="text-xs font-bold uppercase tracking-[.22em] text-banjar-300">Pengalaman Bakoel Banjar</div>
+          <h2 class="mt-3 font-display text-4xl font-bold tracking-[-.03em]">
+            Dibuat untuk terasa santai, hangat, dan mudah dinikmati.
+          </h2>
+          <p class="mt-5 leading-7 text-white/60">
+            Dari datang langsung, take away, hingga catering, pengalaman Bakoel Banjar dirancang tetap sederhana dan dekat dengan kebutuhan sehari-hari.
+          </p>
+
+          <div class="mt-8 space-y-4">
+            <div class="flex gap-4 rounded-xl border border-white/10 bg-white/5 p-4">
+              <i data-lucide="house" class="mt-0.5 size-5 shrink-0 text-banjar-300"></i>
+              <div>
+                <div class="text-sm font-semibold">Nuansa hangat</div>
+                <div class="mt-1 text-xs leading-5 text-white/50">Terinspirasi dari suasana saung dan tempat makan keluarga.</div>
+              </div>
+            </div>
+            <div class="flex gap-4 rounded-xl border border-white/10 bg-white/5 p-4">
+              <i data-lucide="heart-handshake" class="mt-0.5 size-5 shrink-0 text-banjar-300"></i>
+              <div>
+                <div class="text-sm font-semibold">Pelayanan sederhana</div>
+                <div class="mt-1 text-xs leading-5 text-white/50">Tidak berlebihan, fokus pada kebutuhan tamu dan kemudahan memesan.</div>
+              </div>
+            </div>
+            <div class="flex gap-4 rounded-xl border border-white/10 bg-white/5 p-4">
+              <i data-lucide="calendar-days" class="mt-0.5 size-5 shrink-0 text-banjar-300"></i>
+              <div>
+                <div class="text-sm font-semibold">Untuk berbagai momen</div>
+                <div class="mt-1 text-xs leading-5 text-white/50">Keluarga, arisan, makan siang, meeting, hingga kebutuhan acara.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-hover overflow-hidden rounded-[1.8rem] border border-banjar-200 bg-banjar-100">
+          <img
+            src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=1500&q=88"
+            alt="Makan bersama"
+            class="h-full min-h-[520px] w-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="border-y border-banjar-200/70 bg-white/55">
+    <div class="mx-auto max-w-5xl px-5 py-20 text-center lg:px-8">
+      <div class="mx-auto grid size-12 place-items-center rounded-2xl bg-banjar-100 text-banjar-700">
+        <i data-lucide="quote" class="size-5"></i>
+      </div>
+      <blockquote class="mt-6 font-display text-3xl font-bold leading-tight tracking-[-.03em] md:text-5xl">
+        “Rasa Banjar, rasa yang selalu dirindukan.”
+      </blockquote>
+      <p class="mx-auto mt-5 max-w-2xl leading-7 text-stone-600">
+        Kalimat sederhana yang merangkum tujuan kami: menghadirkan rasa yang familiar, hangat, dan ingin dinikmati kembali.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+      <div class="flex flex-col items-start justify-between gap-7 rounded-[1.7rem] bg-gradient-to-r from-banjar-100 to-white px-7 py-8 ring-1 ring-banjar-200 md:flex-row md:items-center md:px-10">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-[.2em] text-banjar-600">Kenal Lebih Dekat</div>
+          <h3 class="mt-2 font-display text-3xl font-bold md:text-4xl">Sekarang waktunya mencicipi sendiri.</h3>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-stone-600">
+            Jelajahi katalog menu atau hubungi kami untuk pesanan dan kebutuhan acara.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="bakoel-banjar-menu.html"
+             class="inline-flex items-center gap-2 rounded-xl bg-banjar-700 px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-banjar-800">
+            Lihat Menu
+            <i data-lucide="arrow-right" class="size-4"></i>
+          </a>
+          <a href="bakoel-banjar-kontak.html"
+             class="inline-flex items-center gap-2 rounded-xl border border-banjar-200 bg-white px-5 py-3 text-sm font-bold text-banjar-800 transition hover:bg-banjar-100">
+            Hubungi Kami
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-banjar-900 text-white">
+    <div class="mx-auto grid max-w-7xl gap-8 px-5 py-10 md:grid-cols-[1.3fr_1fr_1fr_auto] lg:px-8">
+      <div>
+        <div class="font-display text-2xl font-bold">Bakoel Banjar</div>
+        <div class="mt-1 text-sm text-white/55">Masakan Khas Kalimantan</div>
+      </div>
+
+      <div>
+        <div class="text-xs font-bold uppercase tracking-[.18em] text-banjar-300">Lokasi</div>
+        <div class="mt-3 text-sm leading-6 text-white/65">Food Court Taman Semanan Indah<br>Jakarta Barat</div>
+      </div>
+
+      <div>
+        <div class="text-xs font-bold uppercase tracking-[.18em] text-banjar-300">Kontak</div>
+        <div class="mt-3 text-sm leading-6 text-white/65">WhatsApp 0852-8458-8839<br>Instagram @waroengayamduri</div>
+      </div>
+
+      <div>
+        <div class="text-xs font-bold uppercase tracking-[.18em] text-banjar-300">Sosial</div>
+        <div class="mt-3 flex gap-2">
+          <a href="https://www.instagram.com/waroengayamduri" target="_blank" rel="noopener"
+             class="grid size-9 place-items-center rounded-lg border border-white/10 text-white/70 hover:bg-white/10">
+            <i data-lucide="instagram" class="size-4"></i>
+          </a>
+          <a href="#" class="grid size-9 place-items-center rounded-lg border border-white/10 text-white/70 hover:bg-white/10">
+            <i data-lucide="facebook" class="size-4"></i>
+          </a>
+          <a href="#" class="grid size-9 place-items-center rounded-lg border border-white/10 text-white/70 hover:bg-white/10">
+            <i data-lucide="youtube" class="size-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10">
+      <div class="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-5 text-xs text-white/40 sm:flex-row sm:justify-between lg:px-8">
+        <div>© 2026 Bakoel Banjar. All rights reserved.</div>
+        <div>Rasa Banjar, rasa yang selalu dirindukan.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

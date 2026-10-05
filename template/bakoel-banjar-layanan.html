@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#6b3a20" />
+  <meta name="description" content="Layanan Bakoel Banjar — dine in, take away, delivery, catering, acara keluarga, arisan, dan meeting." />
+  <title>Layanan — Bakoel Banjar</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            banjar: {
+              50:'#fcf8f3',
+              100:'#f6eee5',
+              200:'#eadbc9',
+              300:'#dcbf9e',
+              400:'#c49268',
+              500:'#9f633b',
+              600:'#7f4829',
+              700:'#673920',
+              800:'#53301d',
+              900:'#2f1b12'
+            }
+          },
+          fontFamily: {
+            display:['Georgia','ui-serif','serif'],
+            sans:['Inter','ui-sans-serif','system-ui','sans-serif']
+          },
+          boxShadow:{
+            soft:'0 18px 60px rgba(70,42,25,.10)',
+            card:'0 12px 36px rgba(70,42,25,.08)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    html{scroll-behavior:smooth}
+    body{
+      background:
+        radial-gradient(circle at 10% 8%, rgba(196,146,104,.12), transparent 26%),
+        radial-gradient(circle at 90% 14%, rgba(127,72,41,.06), transparent 24%),
+        #fcf8f3;
+    }
+    .noise{
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.024'/%3E%3C/svg%3E");
+    }
+    .service-card img,.feature-photo img{transition:transform .55s ease}
+    .service-card:hover img,.feature-photo:hover img{transform:scale(1.045)}
+    .faq-content{max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .faq-item.open .faq-content{max-height:220px}
+    .faq-item.open .faq-plus{transform:rotate(45deg)}
+    .faq-plus{transition:transform .25s ease}
+  </style>
+</head>
+
+<body class="font-sans text-banjar-900 antialiased selection:bg-banjar-200">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 border-b border-banjar-200/80 bg-banjar-50/90 backdrop-blur-xl">
+    <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
+      <a href="bakoel-banjar-landing.html" class="flex items-center gap-3">
+        <div class="grid size-11 place-items-center rounded-2xl border border-banjar-200 bg-white shadow-sm">
+          <svg viewBox="0 0 48 48" class="size-7 fill-none stroke-banjar-700" stroke-width="2">
+            <path d="M7 22 24 9l17 13M12 20v18m24-18v18M8 38h32M16 38V27h16v11M18 17h12"/>
+          </svg>
+        </div>
+        <div class="leading-tight">
+          <div class="font-display text-xl font-bold">Bakoel Banjar</div>
+          <div class="text-[11px] tracking-wide text-stone-500">Masakan Khas Kalimantan</div>
+        </div>
+      </a>
+
+      <nav class="hidden items-center gap-8 text-sm font-medium text-stone-600 md:flex">
+        <a class="transition hover:text-banjar-700" href="bakoel-banjar-landing.html">Beranda</a>
+        <a class="transition hover:text-banjar-700" href="bakoel-banjar-menu.html">Menu</a>
+        <a class="font-semibold text-banjar-700" href="#layanan">Layanan</a>
+        <a class="transition hover:text-banjar-700" href="bakoel-banjar-landing.html#tentang">Tentang</a>
+        <a class="transition hover:text-banjar-700" href="#footer">Kontak</a>
+      </nav>
+
+      <a href="https://wa.me/6285284588839" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 rounded-xl bg-banjar-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-banjar-800">
+        <i data-lucide="message-circle" class="size-4"></i>
+        <span class="hidden sm:inline">Hubungi Kami</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="layanan" class="noise overflow-hidden border-b border-banjar-200/70">
+    <div class="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[.92fr_1.08fr] lg:px-8 lg:py-24">
+      <div>
+        <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-banjar-200 bg-white/70 px-3 py-1.5 text-xs font-bold uppercase tracking-[.2em] text-banjar-700">
+          <span class="size-1.5 rounded-full bg-banjar-500"></span>
+          Layanan Bakoel Banjar
+        </div>
+
+        <h1 class="max-w-3xl font-display text-5xl font-bold leading-[.98] tracking-[-.04em] md:text-6xl lg:text-7xl">
+          Satu rasa, banyak cara untuk menikmatinya.
+        </h1>
+
+        <p class="mt-6 max-w-xl text-base leading-7 text-stone-600 md:text-lg">
+          Dari makan santai di tempat hingga catering untuk acara, kami siapkan layanan yang fleksibel tanpa menghilangkan hangatnya cita rasa Banjar.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#pilihan-layanan"
+             class="inline-flex items-center gap-2 rounded-xl bg-banjar-700 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-banjar-800">
+            Lihat Semua Layanan
+            <i data-lucide="arrow-down" class="size-4"></i>
+          </a>
+          <a href="https://wa.me/6285284588839" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 rounded-xl border border-banjar-200 bg-white px-5 py-3 text-sm font-semibold text-banjar-900 transition hover:bg-banjar-100">
+            Konsultasi Pesanan
+          </a>
+        </div>
+
+        <div class="mt-9 grid max-w-2xl grid-cols-2 gap-4 border-t border-banjar-200 pt-6 sm:grid-cols-4">
+          <div>
+            <div class="text-2xl font-bold text-banjar-700">01</div>
+            <div class="mt-1 text-xs text-stone-500">Dine In</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-banjar-700">02</div>
+            <div class="mt-1 text-xs text-stone-500">Take Away</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-banjar-700">03</div>
+            <div class="mt-1 text-xs text-stone-500">Delivery</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-banjar-700">04</div>
+            <div class="mt-1 text-xs text-stone-500">Catering & Acara</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-[2rem] border border-white/70 bg-banjar-200 shadow-soft">
+        <img
+          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=88"
+          alt="Suasana rumah makan"
+          class="h-[520px] w-full object-cover lg:h-[590px]"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-banjar-900/55 via-transparent to-transparent"></div>
+        <div class="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/20 bg-banjar-900/65 p-5 text-white backdrop-blur-md">
+          <div class="text-xs font-bold uppercase tracking-[.18em] text-banjar-200">Pengalaman Bersantap</div>
+          <div class="mt-2 font-display text-2xl font-bold">Nyaman untuk keluarga, teman, arisan, dan meeting.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE CARDS -->
+  <section id="pilihan-layanan">
+    <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+      <div class="mb-10 max-w-3xl">
+        <div class="text-xs font-bold uppercase tracking-[.22em] text-banjar-600">Pilihan Layanan</div>
+        <h2 class="mt-3 font-display text-4xl font-bold tracking-[-.03em] md:text-5xl">
+          Dirancang sederhana, supaya Anda tinggal menikmati.
+        </h2>
+        <p class="mt-4 max-w-2xl leading-7 text-stone-600">
+          Pilih layanan yang paling sesuai dengan kebutuhan Anda — untuk makan sehari-hari hingga acara dengan jumlah pesanan lebih besar.
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2">
+        <!-- DINE IN -->
+        <article class="service-card group overflow-hidden rounded-[1.7rem] border border-banjar-200 bg-white shadow-sm">
+          <div class="grid md:grid-cols-[.9fr_1.1fr]">
+            <div class="overflow-hidden bg-banjar-100">
+              <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1000&q=84"
+                   alt="Makan di tempat" class="h-full min-h-[280px] w-full object-cover"/>
+            </div>
+            <div class="flex flex-col justify-between p-7">
+              <div>
+                <div class="mb-5 grid size-11 place-items-center rounded-xl bg-banjar-100 text-banjar-700">
+                  <i data-lucide="utensils" class="size-5"></i>
+                </div>
+                <h3 class="font-display text-3xl font-bold">Makan di Tempat</h3>
+                <p class="mt-3 leading-7 text-stone-600">
+                  Untuk makan santai, keluarga, teman, maupun meeting ringan dalam suasana hangat dan nyaman.
+                </p>
+              </div>
+              <div class="mt-6 flex flex-wrap gap-2">
+                <span class="rounded-full bg-banjar-50 px-3 py-1.5 text-xs font-semibold text-banjar-700">Keluarga</span>
+                <span class="rounded-full bg-banjar-50 px-3 py-1.5 text-xs font-semibold text-banjar-700">Meeting</span>
+                <span class="rounded-full bg-banjar-50 px-3 py-1.5 text-xs font-semibold text-banjar-700">Makan Siang</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- TAKEAWAY -->
+        <article class="service-card group overflow-hidden rounded-[1.7rem] border border-banjar-200 bg-white shadow-sm">
+          <div class="grid md:grid-cols-[.9fr_1.1fr]">
+            <div class="overflow-hidden bg-banjar-100">
+              <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1000&q=84"
+                   alt="Take away" class="h-full min-h-[280px] w-full object-cover"/>
+            </div>
+            <div class="flex flex-col justify-between p-7">
+              <div>
+                <div class="mb-5 grid size-11 place-items-center rounded-xl bg-banjar-100 text-banjar-700">
+                  <i data-lucide="shopping-bag" class="size-5"></i>
+                </div>
+                <h3 class="font-display text-3xl font-bold">Take Away</h3>
+                <p class="mt-3 leading-7 text-stone-600">
+                  Pesan menu favorit lebih dulu, lalu ambil saat sudah siap. Praktis untuk makan di rumah atau kantor.
+                </p>
+              </div>
+              <div class="mt-6 flex flex-wrap gap-2">
+                <span class="rounded-full bg-banjar-50 px-3 py-1.5 text-xs font-semibold text-banjar-700">Praktis</span>
+                <span class="rounded-full bg-banjar-50 px-3 py-1.5 text-xs font-semibold text-banjar-700">Cepat</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- DELIVERY -->
+        <article class="service-card group overflow-hidden rounded-[1.7rem] border border-banjar-200 bg-white shadow-sm">
+          <div class="grid md:grid-cols-[.9fr_1.1fr]">
+            <div class="overflow-hidden bg-banjar-100">
+              <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=1000&q=84"
+                   alt="Delivery" class="h-full min-h-[280px] w-full object-cover"/>
+            </div>
+            <div class="flex flex-col justify-between p-7">
+              <div>
+                <div class="mb-5 grid size-11 place-items-center rounded-xl bg-banjar-100 text-banjar-700">
+                  <i data-lucide="bike" class="size-5"></i>
+                </div>
+                <h3 class="font-display text-3xl font-bold">Delivery</h3>
+                <p class="mt-3 leading-7 text-stone-600">
+                  Nikmati hidangan Bakoel Banjar tanpa harus datang langsung. Cocok untuk rumah maupun kantor.
+                </p>
+              </div>
+              <div class="mt-6 flex flex-wrap gap-2">
+                <span class="rounded-full bg-banjar-50 px-3 py-1.5 text-xs font-semibold text-banjar-700">Rumah</span>
+                <span class="rounded-full bg-banjar-50 px-3 py-1.5 text-xs font-semibold text-banjar-700">Kantor</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CATERING -->
+        <article class="service-card group overflow-hidden rounded-[1.7rem] border border-banjar-200 bg-white shadow-sm">
+          <div class="grid md:grid-cols-[.9fr_1.1fr]">
+            <div class="overflow-hidden bg-banjar-100">
+              <img src="https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=1000&q=84"
+                   alt="Catering dan acara" class="h-full min-h-[280px] w-full object-cover"/>
+            </div>
+            <div class="flex flex-col justify-between p-7">
+              <div>
+                <div class="mb-5 grid size-11 place-items-center rounded-xl bg-banjar-100 text-banjar-700">
+                  <i data-lucide="users" class="size-5"></i>
+                </div>
+                <h3 class="font-display text-3xl font-bold">Catering & Acara</h3>
+                <p class="mt-3 leading-7 text-stone-600">
+                  Untuk kebutuhan keluarga, arisan, kantor, meeting, hingga acara khusus dengan pilihan menu yang fleksibel.
+                </p>
+              </div>
+              <div class="mt-6 flex flex-wrap gap-2">
+                <span class="rounded-full bg-banjar-50 px-3 py-1.5 text-xs font-semibold text-banjar-700">Arisan</span>
+                <span class="rounded-full bg-banjar-50 px-3 py-1.5 text-xs font-semibold text-banjar-700">Kantor</span>
+                <span class="rounded-full bg-banjar-50 px-3 py-1.5 text-xs font-semibold text-banjar-700">Acara Keluarga</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="border-y border-banjar-200/70 bg-white/55">
+    <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[.82fr_1.18fr] lg:items-start">
+        <div class="lg:sticky lg:top-28">
+          <div class="text-xs font-bold uppercase tracking-[.22em] text-banjar-600">Cara Pesan</div>
+          <h2 class="mt-3 font-display text-4xl font-bold tracking-[-.03em] md:text-5xl">
+            Dari pilih menu sampai siap dinikmati.
+          </h2>
+          <p class="mt-4 max-w-xl leading-7 text-stone-600">
+            Prosesnya dibuat sederhana agar pesanan personal maupun kebutuhan acara bisa ditangani lebih cepat.
+          </p>
+
+          <a href="bakoel-banjar-menu.html"
+             class="mt-7 inline-flex items-center gap-2 rounded-xl border border-banjar-200 bg-white px-5 py-3 text-sm font-semibold text-banjar-800 transition hover:bg-banjar-100">
+            Lihat Katalog Menu
+            <i data-lucide="arrow-right" class="size-4"></i>
+          </a>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex gap-5 rounded-2xl border border-banjar-200 bg-white p-6">
+            <div class="grid size-12 shrink-0 place-items-center rounded-2xl bg-banjar-700 text-sm font-bold text-white">01</div>
+            <div>
+              <h3 class="font-display text-2xl font-bold">Pilih layanan dan menu</h3>
+              <p class="mt-2 text-sm leading-6 text-stone-600">Tentukan apakah ingin dine in, take away, delivery, atau kebutuhan catering dan acara.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-5 rounded-2xl border border-banjar-200 bg-white p-6">
+            <div class="grid size-12 shrink-0 place-items-center rounded-2xl bg-banjar-100 text-sm font-bold text-banjar-700">02</div>
+            <div>
+              <h3 class="font-display text-2xl font-bold">Konfirmasi kebutuhan</h3>
+              <p class="mt-2 text-sm leading-6 text-stone-600">Untuk pesanan besar, informasikan jumlah porsi, waktu, lokasi, dan kebutuhan khusus Anda.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-5 rounded-2xl border border-banjar-200 bg-white p-6">
+            <div class="grid size-12 shrink-0 place-items-center rounded-2xl bg-banjar-100 text-sm font-bold text-banjar-700">03</div>
+            <div>
+              <h3 class="font-display text-2xl font-bold">Kami siapkan pesanan</h3>
+              <p class="mt-2 text-sm leading-6 text-stone-600">Tim kami menyiapkan hidangan sesuai pesanan dan waktu yang telah disepakati.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-5 rounded-2xl border border-banjar-200 bg-white p-6">
+            <div class="grid size-12 shrink-0 place-items-center rounded-2xl bg-banjar-100 text-sm font-bold text-banjar-700">04</div>
+            <div>
+              <h3 class="font-display text-2xl font-bold">Tinggal menikmati</h3>
+              <p class="mt-2 text-sm leading-6 text-stone-600">Ambil pesanan, terima pengantaran, atau nikmati langsung hidangan di tempat.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATERING FEATURE -->
+  <section>
+    <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+      <div class="grid overflow-hidden rounded-[2rem] border border-banjar-200 bg-banjar-900 text-white lg:grid-cols-[1.05fr_.95fr]">
+        <div class="p-8 md:p-12 lg:p-14">
+          <div class="text-xs font-bold uppercase tracking-[.22em] text-banjar-300">Untuk Acara</div>
+          <h2 class="mt-3 max-w-xl font-display text-4xl font-bold tracking-[-.03em] md:text-5xl">
+            Bawa cita rasa Bakoel Banjar ke momen spesial Anda.
+          </h2>
+          <p class="mt-5 max-w-xl leading-7 text-white/65">
+            Kami melayani kebutuhan hidangan untuk keluarga, kantor, arisan, meeting, dan berbagai acara lainnya dengan pilihan menu yang dapat disesuaikan.
+          </p>
+
+          <div class="mt-8 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+              <i data-lucide="calendar-days" class="size-5 text-banjar-300"></i>
+              <div class="mt-3 text-sm font-semibold">Jadwal Fleksibel</div>
+              <div class="mt-1 text-xs leading-5 text-white/50">Atur waktu pengambilan atau pengantaran sesuai kebutuhan.</div>
+            </div>
+            <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+              <i data-lucide="sliders-horizontal" class="size-5 text-banjar-300"></i>
+              <div class="mt-3 text-sm font-semibold">Menu Fleksibel</div>
+              <div class="mt-1 text-xs leading-5 text-white/50">Pilih kombinasi menu yang paling cocok untuk acara Anda.</div>
+            </div>
+            <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+              <i data-lucide="package-check" class="size-5 text-banjar-300"></i>
+              <div class="mt-3 text-sm font-semibold">Pesanan Jumlah Besar</div>
+              <div class="mt-1 text-xs leading-5 text-white/50">Cocok untuk kebutuhan kantor dan acara bersama.</div>
+            </div>
+            <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+              <i data-lucide="message-circle" class="size-5 text-banjar-300"></i>
+              <div class="mt-3 text-sm font-semibold">Konsultasi Cepat</div>
+              <div class="mt-1 text-xs leading-5 text-white/50">Kebutuhan acara dapat dibicarakan langsung melalui WhatsApp.</div>
+            </div>
+          </div>
+
+          <a href="https://wa.me/6285284588839" target="_blank" rel="noopener"
+             class="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-banjar-800 transition hover:-translate-y-0.5">
+            Konsultasi Catering
+            <i data-lucide="arrow-right" class="size-4"></i>
+          </a>
+        </div>
+
+        <div class="feature-photo min-h-[460px] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=1400&q=88"
+            alt="Acara dan catering"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="pb-20">
+    <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.72fr_1.28fr] lg:px-8">
+      <div>
+        <div class="text-xs font-bold uppercase tracking-[.22em] text-banjar-600">Pertanyaan Umum</div>
+        <h2 class="mt-3 font-display text-4xl font-bold tracking-[-.03em] md:text-5xl">Sebelum memesan, mungkin ini yang ingin Anda tahu.</h2>
+      </div>
+
+      <div class="divide-y divide-banjar-200 rounded-2xl border border-banjar-200 bg-white px-6">
+        <div class="faq-item">
+          <button class="faq-toggle flex w-full items-center justify-between gap-4 py-5 text-left">
+            <span class="font-semibold">Apakah bisa pesan untuk acara keluarga atau kantor?</span>
+            <span class="faq-plus grid size-8 shrink-0 place-items-center rounded-full bg-banjar-100 text-banjar-700"><i data-lucide="plus" class="size-4"></i></span>
+          </button>
+          <div class="faq-content">
+            <p class="pb-5 text-sm leading-6 text-stone-600">Bisa. Anda dapat menghubungi kami untuk menyesuaikan jumlah porsi, pilihan menu, waktu, dan kebutuhan pengantaran.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle flex w-full items-center justify-between gap-4 py-5 text-left">
+            <span class="font-semibold">Apakah tersedia take away dan delivery?</span>
+            <span class="faq-plus grid size-8 shrink-0 place-items-center rounded-full bg-banjar-100 text-banjar-700"><i data-lucide="plus" class="size-4"></i></span>
+          </button>
+          <div class="faq-content">
+            <p class="pb-5 text-sm leading-6 text-stone-600">Ya. Anda dapat memilih take away atau menghubungi kami untuk opsi delivery sesuai area layanan yang tersedia.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle flex w-full items-center justify-between gap-4 py-5 text-left">
+            <span class="font-semibold">Apakah menu catering bisa disesuaikan?</span>
+            <span class="faq-plus grid size-8 shrink-0 place-items-center rounded-full bg-banjar-100 text-banjar-700"><i data-lucide="plus" class="size-4"></i></span>
+          </button>
+          <div class="faq-content">
+            <p class="pb-5 text-sm leading-6 text-stone-600">Bisa. Pilihan menu dapat didiskusikan berdasarkan kebutuhan acara, jumlah porsi, dan menu yang tersedia.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle flex w-full items-center justify-between gap-4 py-5 text-left">
+            <span class="font-semibold">Bagaimana cara paling cepat untuk melakukan pemesanan?</span>
+            <span class="faq-plus grid size-8 shrink-0 place-items-center rounded-full bg-banjar-100 text-banjar-700"><i data-lucide="plus" class="size-4"></i></span>
+          </button>
+          <div class="faq-content">
+            <p class="pb-5 text-sm leading-6 text-stone-600">Cara paling cepat adalah menghubungi Bakoel Banjar melalui WhatsApp agar detail pesanan dapat langsung dikonfirmasi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="pb-20">
+    <div class="mx-auto max-w-7xl px-5 lg:px-8">
+      <div class="flex flex-col items-start justify-between gap-7 rounded-[1.7rem] border border-banjar-200 bg-gradient-to-r from-banjar-100 to-white px-7 py-8 md:flex-row md:items-center md:px-10">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-[.2em] text-banjar-600">Bakoel Banjar</div>
+          <h3 class="mt-2 font-display text-3xl font-bold md:text-4xl">Ada kebutuhan khusus untuk pesanan Anda?</h3>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-stone-600">Ceritakan kebutuhan Anda, kami bantu sesuaikan layanan dan pilihan menunya.</p>
+        </div>
+        <a href="https://wa.me/6285284588839" target="_blank" rel="noopener"
+           class="inline-flex shrink-0 items-center gap-2 rounded-xl bg-banjar-700 px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-banjar-800">
+          <i data-lucide="message-circle" class="size-4"></i>
+          Hubungi Kami
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer" class="bg-banjar-900 text-white">
+    <div class="mx-auto grid max-w-7xl gap-8 px-5 py-10 md:grid-cols-[1.3fr_1fr_1fr_auto] lg:px-8">
+      <div>
+        <div class="font-display text-2xl font-bold">Bakoel Banjar</div>
+        <div class="mt-1 text-sm text-white/55">Masakan Khas Kalimantan</div>
+      </div>
+
+      <div>
+        <div class="text-xs font-bold uppercase tracking-[.18em] text-banjar-300">Lokasi</div>
+        <div class="mt-3 text-sm leading-6 text-white/65">Food Court Taman Semanan Indah<br>Jakarta Barat</div>
+      </div>
+
+      <div>
+        <div class="text-xs font-bold uppercase tracking-[.18em] text-banjar-300">Kontak</div>
+        <div class="mt-3 text-sm leading-6 text-white/65">WhatsApp 0852-8458-8839<br>Instagram @waroengayamduri</div>
+      </div>
+
+      <div>
+        <div class="text-xs font-bold uppercase tracking-[.18em] text-banjar-300">Sosial</div>
+        <div class="mt-3 flex gap-2">
+          <a href="#" class="grid size-9 place-items-center rounded-lg border border-white/10 text-white/70 hover:bg-white/10"><i data-lucide="instagram" class="size-4"></i></a>
+          <a href="#" class="grid size-9 place-items-center rounded-lg border border-white/10 text-white/70 hover:bg-white/10"><i data-lucide="facebook" class="size-4"></i></a>
+          <a href="#" class="grid size-9 place-items-center rounded-lg border border-white/10 text-white/70 hover:bg-white/10"><i data-lucide="youtube" class="size-4"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10">
+      <div class="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-5 text-xs text-white/40 sm:flex-row sm:justify-between lg:px-8">
+        <div>© 2026 Bakoel Banjar. All rights reserved.</div>
+        <div>Rasa Banjar, rasa yang selalu dirindukan.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    document.querySelectorAll('.faq-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+</body>
+</html>
