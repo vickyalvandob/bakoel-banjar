@@ -10,6 +10,7 @@ export type Contact = {
 export type MenuItem = {
     id: number;
     name: string;
+    category_id: number;
     category: string;
     description: string | null;
     price: number;
@@ -18,6 +19,11 @@ export type MenuItem = {
     is_featured: boolean;
     is_published?: boolean;
     sort_order?: number;
+};
+
+export type MenuCategory = {
+    id: number;
+    name: string;
 };
 
 export type Paginated<T> = {

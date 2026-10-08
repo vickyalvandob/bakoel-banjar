@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\MenuItem;
+use App\Models\MenuCategory;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -18,7 +18,7 @@ class MenuItemRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:120'],
-            'category' => ['required', Rule::in(MenuItem::CATEGORIES)],
+            'category_id' => ['required', 'integer', Rule::exists(MenuCategory::class, 'id')],
             'description' => ['nullable', 'string', 'max:1000'],
             'price' => ['required', 'integer', 'min:0', 'max:100000000'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096', 'dimensions:max_width=6000,max_height=6000'],
@@ -36,7 +36,8 @@ class MenuItemRequest extends FormRequest
         return [
             'name.required' => 'Nama menu wajib diisi.',
             'name.max' => 'Nama menu maksimal 120 karakter.',
-            'category.in' => 'Pilih kategori menu yang tersedia.',
+            'category_id.required' => 'Pilih kategori menu yang tersedia.',
+            'category_id.exists' => 'Pilih kategori menu yang tersedia.',
             'price.required' => 'Harga menu wajib diisi.',
             'price.integer' => 'Harga harus berupa Rupiah tanpa desimal.',
             'price.min' => 'Harga tidak boleh negatif.',

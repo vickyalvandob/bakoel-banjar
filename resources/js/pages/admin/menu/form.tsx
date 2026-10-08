@@ -8,18 +8,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { index, store, update } from '@/routes/admin/menu';
-import type { MenuItem } from '@/types/bakoel';
+import { index as categoriesIndex } from '@/routes/admin/categories';
+import type { MenuCategory, MenuItem } from '@/types/bakoel';
 
 export default function MenuForm({
     item,
     categories,
 }: {
     item: MenuItem | null;
-    categories: string[];
+    categories: MenuCategory[];
 }) {
     const form = useForm({
         name: item?.name || '',
-        category: item?.category || categories[0],
+        category_id:
+            item?.category_id?.toString() || categories[0]?.id.toString() || '',
         description: item?.description || '',
         price: item?.price?.toString() || '',
         image: null as File | null,
@@ -50,11 +52,11 @@ export default function MenuForm({
         });
     }
     return (
-        <div className="mx-auto w-full max-w-5xl p-5 md:p-8">
+        <div className="cms-page">
             <Head title={item ? 'Edit menu' : 'Tambah menu'} />
             <Link
                 href={index()}
-                className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground"
+                className="mb-5 inline-flex items-center gap-2 text-sm text-muted-foreground"
             >
                 <ArrowLeft size={16} />
                 Kembali ke daftar menu
@@ -65,11 +67,11 @@ export default function MenuForm({
             />
             <form
                 onSubmit={submit}
-                className="grid gap-6 md:grid-cols-[1.5fr_1fr]"
+                className="grid items-start gap-5 lg:grid-cols-[1.65fr_1fr]"
             >
-                <div className="space-y-6 rounded-xl border p-6">
-                    <h2 className="font-semibold">Informasi menu</h2>
-                    <div className="grid gap-2">
+                <div className="cms-panel space-y-5 p-5 sm:p-6">
+                    <h2 className="text-sm font-semibold">Informasi menu</h2>
+                    <div className="cms-field">
                         <Label htmlFor="name">
                             Nama menu <span aria-hidden="true">*</span>
                         </Label>
@@ -87,23 +89,37 @@ export default function MenuForm({
                         <InputError message={form.errors.name} />
                     </div>
                     <div className="grid gap-5 sm:grid-cols-2">
-                        <div className="grid gap-2">
-                            <Label htmlFor="category">Kategori</Label>
+                        <div className="cms-field">
+                            <Label htmlFor="category_id">Kategori</Label>
                             <select
-                                id="category"
-                                value={form.data.category}
+                                id="category_id"
+                                required
+                                value={form.data.category_id}
                                 onChange={(e) =>
-                                    form.setData('category', e.target.value)
+                                    form.setData('category_id', e.target.value)
                                 }
-                                className="h-9 rounded-md border bg-background px-3 text-sm"
+                                className="cms-input"
                             >
+                                <option value="" disabled>
+                                    Pilih kategori
+                                </option>
                                 {categories.map((c) => (
-                                    <option key={c}>{c}</option>
+                                    <option key={c.id} value={c.id}>
+                                        {c.name}
+                                    </option>
                                 ))}
                             </select>
-                            <InputError message={form.errors.category} />
+                            <InputError message={form.errors.category_id} />
+                            <Link
+                                href={categoriesIndex()}
+                                className="text-xs text-muted-foreground underline underline-offset-4"
+                            >
+                                {categories.length
+                                    ? 'Kelola kategori'
+                                    : 'Tambahkan kategori terlebih dahulu'}
+                            </Link>
                         </div>
-                        <div className="grid gap-2">
+                        <div className="cms-field">
                             <Label htmlFor="price">Harga (Rp)</Label>
                             <Input
                                 id="price"
@@ -121,7 +137,7 @@ export default function MenuForm({
                             <InputError message={form.errors.price} />
                         </div>
                     </div>
-                    <div className="grid gap-2">
+                    <div className="cms-field">
                         <Label htmlFor="description">Deskripsi</Label>
                         <textarea
                             id="description"
@@ -131,12 +147,12 @@ export default function MenuForm({
                             onChange={(e) =>
                                 form.setData('description', e.target.value)
                             }
-                            className="w-full rounded-md border bg-background px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-ring"
+                            className="cms-textarea"
                             placeholder="Ceritakan bahan atau keistimewaan menu ini."
                         />
                         <InputError message={form.errors.description} />
                     </div>
-                    <div className="grid gap-2">
+                    <div className="cms-field">
                         <Label htmlFor="sort_order">Urutan tampil</Label>
                         <Input
                             id="sort_order"
@@ -158,9 +174,9 @@ export default function MenuForm({
                         <InputError message={form.errors.sort_order} />
                     </div>
                 </div>
-                <div className="space-y-6">
-                    <section className="rounded-xl border p-6">
-                        <h2 className="font-semibold">Foto menu</h2>
+                <div className="space-y-5">
+                    <section className="cms-panel p-5 sm:p-6">
+                        <h2 className="text-sm font-semibold">Foto menu</h2>
                         <div className="mt-4 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-lg border border-dashed bg-muted/40">
                             {preview ? (
                                 <img
@@ -214,8 +230,8 @@ export default function MenuForm({
                             </label>
                         )}
                     </section>
-                    <section className="space-y-5 rounded-xl border p-6">
-                        <h2 className="font-semibold">Pengaturan tampilan</h2>
+                    <section className="space-y-5 cms-panel p-5 sm:p-6">
+                        <h2 className="text-sm font-semibold">Publikasi</h2>
                         {[
                             {
                                 key: 'is_published' as const,
@@ -241,7 +257,7 @@ export default function MenuForm({
                                         onChange={(e) =>
                                             form.setData(key, e.target.checked)
                                         }
-                                        className="mt-1 size-4 accent-[#244a38]"
+                                        className="mt-1 size-4 accent-primary"
                                     />
                                     <span>
                                         <span className="block text-sm font-medium">
@@ -257,11 +273,11 @@ export default function MenuForm({
                         ))}
                     </section>
                 </div>
-                <div className="flex items-center justify-end gap-3 border-t pt-5 md:col-span-2">
+                <div className="cms-form-footer justify-end lg:col-span-2">
                     <Button variant="outline" asChild>
                         <Link href={index()}>Batal</Link>
                     </Button>
-                    <Button disabled={form.processing}>
+                    <Button disabled={form.processing || !categories.length}>
                         <Save size={16} />
                         {form.processing ? 'Menyimpan...' : 'Simpan menu'}
                     </Button>
@@ -269,7 +285,7 @@ export default function MenuForm({
                 {form.progress && (
                     <p
                         role="status"
-                        className="text-sm text-muted-foreground md:col-span-2"
+                        className="text-sm text-muted-foreground lg:col-span-2"
                     >
                         Mengunggah {form.progress.percentage}%
                     </p>

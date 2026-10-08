@@ -1,24 +1,13 @@
 import type { PropsWithChildren } from 'react';
 
-export default function CmsHeading({
-    title,
-    description,
-    children,
-}: PropsWithChildren<{ title: string; description: string }>) {
+export default function CmsHeading({ title, description, children }: PropsWithChildren<{ title: string; description: string }>) {
     return (
-        <div className="mb-7 flex flex-wrap items-center justify-between gap-4">
-            <div>
-                <p className="mb-2 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
-                    CMS Bakoel Banjar
-                </p>
-                <h1 className="text-2xl font-semibold tracking-tight">
-                    {title}
-                </h1>
-                <p className="mt-2 text-sm text-muted-foreground">
-                    {description}
-                </p>
+        <div className="mb-6 flex flex-wrap items-start justify-between gap-4 sm:items-center">
+            <div className="min-w-0">
+                <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
+                <p className="mt-1.5 max-w-xl text-sm leading-6 text-muted-foreground">{description}</p>
             </div>
-            {children}
+            {children && <div className="flex shrink-0 items-center gap-2">{children}</div>}
         </div>
     );
 }

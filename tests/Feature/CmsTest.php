@@ -105,7 +105,7 @@ test('invalid prices and categories never create a menu', function (array $overr
     [['price' => -1], 'price', 'Harga tidak boleh negatif.'],
     [['price' => '12.5'], 'price', 'Harga harus berupa Rupiah tanpa desimal.'],
     [['price' => 100000001], 'price', 'Harga maksimal Rp100.000.000.'],
-    [['category' => 'Invalid'], 'category', 'Pilih kategori menu yang tersedia.'],
+    [['category_id' => 999999], 'category_id', 'Pilih kategori menu yang tersedia.'],
 ]);
 
 test('unsafe or oversized uploads do not modify existing menu or photo', function (string $kind) {
@@ -168,4 +168,45 @@ test('public registration is unavailable', function () {
     $this->get('/register')->assertNotFound();
     $this->post('/register', ['email' => 'intruder@example.com', 'is_admin' => true])->assertNotFound();
     $this->assertDatabaseCount('users', 0);
+});
+
+
+test('admin menu status filters combine with category and search and persist through pagination', function () {
+    $category = \App\Models\MenuCategory::factory()->create();
+    MenuItem::factory()->for($category, 'category')->count(16)->draft()->create(['name' => 'Ayam draf']);
+    MenuItem::factory()->for($category, 'category')->create(['name' => 'Ayam tayang']);
+    MenuItem::factory()->draft()->create(['name' => 'Ayam kategori lain']);
+
+    $this->actingAs(User::factory()->admin()->create())->get(route('admin.menu.index', [
+        'status' => 'draft', 'category' => $category->name, 'search' => 'Ayam',
+    ]))->assertInertia(fn (Assert $page) => $page
+        ->where('items.total', 16)->has('items.data', 15)->where('items.data.0.is_published', false)
+        ->where('filters.status', 'draft')
+        ->where('items.next_page_url', fn (string $url) => str_contains($url, 'status=draft') && str_contains($url, 'search=Ayam')));
+});
+
+test('admin menu filters return only the selected publication or availability status', function (string $status, bool $published, bool $available) {
+    $match = MenuItem::factory()->create(['is_published' => $published, 'is_available' => $available]);
+    MenuItem::factory()->create(['is_published' => ! $published, 'is_available' => ! $available]);
+
+    $this->actingAs(User::factory()->admin()->create())->get(route('admin.menu.index', ['status' => $status]))
+        ->assertInertia(fn (Assert $page) => $page->has('items.data', 1)->where('items.data.0.id', $match->id));
+})->with([
+    ['published', true, true],
+    ['unavailable', true, false],
+]);
+
+test('invalid admin menu status is rejected', function () {
+    $this->actingAs(User::factory()->admin()->create())->get(route('admin.menu.index', ['status' => 'invalid']))
+        ->assertSessionHasErrors('status');
+});
+
+test('dashboard includes the five most recently updated menus and category count', function () {
+    MenuItem::factory()->count(5)->create(['updated_at' => '2026-10-01 10:00:00']);
+    $latest = MenuItem::factory()->draft()->create(['updated_at' => '2026-10-08 10:00:00']);
+
+    $this->actingAs(User::factory()->admin()->create())->get(route('admin.dashboard'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('stats.total', 6)->where('stats.published', 5)->where('stats.categories', 6)
+            ->has('recent', 5)->where('recent.0.id', $latest->id)->where('recent.0.is_published', false));
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MenuFilterRequest;
 use App\Models\ContactSetting;
+use App\Models\MenuCategory;
 use App\Models\MenuItem;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -14,7 +15,7 @@ class PublicSiteController extends Controller
     {
         return Inertia::render('public/home', [
             'contact' => ContactSetting::current()->publicData(),
-            'featured' => MenuItem::query()->where('is_published', true)->where('is_featured', true)
+            'featured' => MenuItem::query()->with('category')->where('is_published', true)->where('is_featured', true)
                 ->orderBy('sort_order')->orderBy('id')->limit(4)->get()->map->publicData(),
         ]);
     }
@@ -23,11 +24,11 @@ class PublicSiteController extends Controller
     {
         return Inertia::render('public/menu', [
             'contact' => ContactSetting::current()->publicData(),
-            'items' => MenuItem::query()->where('is_published', true)
+            'items' => MenuItem::query()->with('category')->where('is_published', true)
                 ->when($request->filled('search'), fn ($query) => $query->where('name', 'like', '%'.$request->string('search').'%'))
-                ->when($request->filled('category'), fn ($query) => $query->where('category', $request->string('category')))
+                ->when($request->filled('category'), fn ($query) => $query->whereHas('category', fn ($category) => $category->where('name', $request->string('category'))))
                 ->orderBy('sort_order')->orderBy('id')->paginate(12)->withQueryString()->through(fn (MenuItem $item) => $item->publicData()),
-            'categories' => MenuItem::CATEGORIES,
+            'categories' => MenuCategory::query()->orderBy('sort_order')->orderBy('id')->get(['id', 'name']),
             'filters' => $request->only('search', 'category'),
         ]);
     }

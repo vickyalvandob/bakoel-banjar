@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { Globe, LayoutGrid, MapPin, Soup } from 'lucide-react';
+import { Globe, LayoutGrid, MapPin, Soup, Tags } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -16,6 +16,7 @@ import {
 import { home } from '@/routes';
 import { dashboard } from '@/routes/admin';
 import { index } from '@/routes/admin/menu';
+import { index as categoriesIndex } from '@/routes/admin/categories';
 import { edit } from '@/routes/admin/contact';
 import type { NavItem } from '@/types';
 
@@ -26,6 +27,7 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     { title: 'Kelola menu', href: index(), icon: Soup },
+    { title: 'Kategori menu', href: categoriesIndex(), icon: Tags },
     { title: 'Informasi kontak', href: edit(), icon: MapPin },
 ];
 
@@ -40,8 +42,8 @@ const footerNavItems: NavItem[] = [
 export function AppSidebar() {
     const { auth } = usePage().props;
     return (
-        <Sidebar collapsible="icon" variant="inset">
-            <SidebarHeader>
+        <Sidebar collapsible="icon" variant="sidebar">
+            <SidebarHeader className="border-b p-3">
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
@@ -57,7 +59,7 @@ export function AppSidebar() {
                 <NavMain items={auth.user.is_admin ? mainNavItems : []} />
             </SidebarContent>
 
-            <SidebarFooter>
+            <SidebarFooter className="gap-2 border-t p-3">
                 <NavFooter items={footerNavItems} className="mt-auto" />
                 <NavUser />
             </SidebarFooter>

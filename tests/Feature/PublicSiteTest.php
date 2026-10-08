@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\ContactSetting;
+use App\Models\MenuCategory;
 use App\Models\MenuItem;
 use Database\Seeders\ContactSettingSeeder;
 use Database\Seeders\MenuItemSeeder;
@@ -31,10 +32,11 @@ test('home only shows four published featured menus in display order', function 
 });
 
 test('menu filters published items by search and category', function () {
-    $match = MenuItem::factory()->create(['name' => 'Ayam Gami', 'category' => 'Ayam']);
-    MenuItem::factory()->draft()->create(['name' => 'Ayam rahasia', 'category' => 'Ayam']);
-    MenuItem::factory()->create(['name' => 'Bebek', 'category' => 'Bebek']);
-    MenuItem::factory()->create(['name' => 'Ayam special', 'category' => 'Gami Spesial']);
+    $category = MenuCategory::factory()->create(['name' => 'Ayam']);
+    $match = MenuItem::factory()->for($category, 'category')->create(['name' => 'Ayam Gami']);
+    MenuItem::factory()->for($category, 'category')->draft()->create(['name' => 'Ayam rahasia']);
+    MenuItem::factory()->create(['name' => 'Bebek']);
+    MenuItem::factory()->create(['name' => 'Ayam special']);
 
     $this->get(route('menu', ['search' => 'Ayam', 'category' => 'Ayam']))
         ->assertInertia(fn (Assert $page) => $page
@@ -59,7 +61,7 @@ test('empty site renders without creating contact records on read', function () 
     $this->assertDatabaseCount('contact_settings', 0);
 });
 
-test('template seeders preserve administrator edits on rerun', function () {
+test('content seeders reapply editable data on rerun without duplicates', function () {
     Storage::fake('public');
     $this->seed([ContactSettingSeeder::class, MenuItemSeeder::class]);
     $item = MenuItem::query()->where('name', 'Ayam Sambal Gami')->firstOrFail();
@@ -69,6 +71,6 @@ test('template seeders preserve administrator edits on rerun', function () {
     $this->seed([ContactSettingSeeder::class, MenuItemSeeder::class]);
 
     $this->assertDatabaseCount('menu_items', 22);
-    $this->assertDatabaseHas('menu_items', ['id' => $item->id, 'price' => 30000, 'is_published' => false]);
-    $this->assertDatabaseHas('contact_settings', ['key' => 'main', 'whatsapp' => '628111111111']);
+    $this->assertDatabaseHas('menu_items', ['id' => $item->id, 'price' => 22000, 'is_published' => true]);
+    $this->assertDatabaseHas('contact_settings', ['key' => 'main', 'whatsapp' => '6285284588839']);
 });

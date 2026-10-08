@@ -2,63 +2,195 @@
 
 namespace Database\Seeders;
 
+use App\Models\MenuCategory;
 use App\Models\MenuItem;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class MenuItemSeeder extends Seeder
 {
     public function run(): void
     {
+        $this->call(MenuCategorySeeder::class);
+        $categories = MenuCategory::query()->pluck('id', 'seed_key');
+
+        /** Ubah data menu di sini. Key tetap sama saat mengganti nama atau harga. */
         $items = [
-            ['name' => 'Ayam Sambal Gami', 'category' => 'Gami Spesial', 'price' => 22000, 'description' => 'Ayam gurih dengan sambal gami panas khas Banjar.', 'photo' => 'photo-1547592180-85f173990554'],
-            ['name' => 'Bebek Gami', 'category' => 'Gami Spesial', 'price' => 35000, 'description' => 'Bebek empuk dengan sambal gami yang pedas dan wangi.', 'photo' => 'photo-1544025162-d76694265947'],
-            ['name' => 'Udang Sambal Gami', 'category' => 'Gami Spesial', 'price' => 35000, 'description' => 'Udang segar dengan sambal gami pedas aromatik.', 'photo' => 'photo-1565680018434-b513d5e5fd47'],
-            ['name' => 'Nila Gami', 'category' => 'Gami Spesial', 'price' => 25000, 'description' => 'Ikan nila dengan sambal gami gurih dan pedas.', 'photo' => 'photo-1515003197210-e0cd71810b5f'],
-            ['name' => 'Iga Bakar Saus BBQ', 'category' => 'Iga & Sapi', 'price' => 50000, 'description' => 'Iga sapi bakar dengan saus BBQ yang manis gurih.', 'photo' => 'photo-1544025162-d76694265947'],
-            ['name' => 'Sapi Lada Hitam', 'category' => 'Iga & Sapi', 'price' => 50000, 'description' => 'Daging sapi dengan lada hitam dan saus gurih.', 'photo' => 'photo-1558030006-450675393462'],
-            ['name' => 'Ayam Bakar Madu', 'category' => 'Ayam', 'price' => 18000, 'description' => 'Ayam bakar dengan sentuhan madu yang manis gurih.', 'photo' => 'photo-1532550907401-a500c9a57435'],
-            ['name' => 'Ayam Rica-Rica', 'category' => 'Ayam', 'price' => 25000, 'description' => 'Pedas aromatik dengan bumbu yang meresap.', 'photo' => 'photo-1604908176997-125f25cc6f3d'],
-            ['name' => 'Ayam Kampung Goreng', 'category' => 'Ayam Kampung', 'price' => 25000, 'description' => 'Ayam kampung goreng dengan tekstur gurih.', 'photo' => 'photo-1562967914-608f82629710'],
-            ['name' => 'Ayam Kampung Kecap', 'category' => 'Ayam Kampung', 'price' => 35000, 'description' => 'Manis gurih, cocok untuk makan bersama.', 'photo' => 'photo-1601050690597-df0568f70950'],
-            ['name' => 'Bebek Goreng', 'category' => 'Bebek', 'price' => 30000, 'description' => 'Bebek goreng gurih dengan tekstur renyah.', 'photo' => 'photo-1598514983318-2f64f8f4796c'],
-            ['name' => 'Bebek Rica-Rica', 'category' => 'Bebek', 'price' => 35000, 'description' => 'Bebek dengan rica-rica pedas yang kaya rempah.', 'photo' => 'photo-1544025162-d76694265947'],
-            ['name' => 'Udang Bakar', 'category' => 'Seafood', 'price' => 35000, 'description' => 'Udang segar dibakar dengan bumbu gurih manis.', 'photo' => 'photo-1565680018434-b513d5e5fd47'],
-            ['name' => 'Cumi Saus Padang', 'category' => 'Seafood', 'price' => 45000, 'description' => 'Cumi dengan saus pedas gurih yang kaya rasa.', 'photo' => 'photo-1565299507177-b0ac66763828'],
-            ['name' => 'Gurame Bakar', 'category' => 'Ikan', 'price' => 75000, 'description' => 'Gurame bakar dengan bumbu khas yang kaya rasa.', 'photo' => 'photo-1515003197210-e0cd71810b5f'],
-            ['name' => 'Nila Bakar', 'category' => 'Ikan', 'price' => 25000, 'description' => 'Ikan nila bakar dengan bumbu gurih.', 'photo' => 'photo-1515003197210-e0cd71810b5f'],
-            ['name' => 'Cah Pakcoy Saus Tiram', 'category' => 'Sayuran', 'price' => 18000, 'description' => 'Pakcoy segar dengan saus tiram gurih.', 'photo' => 'photo-1512621776951-a57141f2eefd'],
-            ['name' => 'Genjer Cah Pedas', 'category' => 'Sayuran', 'price' => 13000, 'description' => 'Tumis genjer pedas dengan rasa segar.', 'photo' => 'photo-1512621776951-a57141f2eefd'],
-            ['name' => 'Nasi Goreng Ayam', 'category' => 'Nasi', 'price' => 18000, 'description' => 'Nasi goreng gurih dengan topping ayam.', 'photo' => 'photo-1603133872878-684f208fb84b'],
-            ['name' => 'Nasi Goreng Seafood', 'category' => 'Nasi', 'price' => 20000, 'description' => 'Nasi goreng dengan seafood pilihan.', 'photo' => 'photo-1603133872878-684f208fb84b'],
-            ['name' => 'Es Teh Manis', 'category' => 'Minuman', 'price' => 5000, 'description' => 'Segar dan cocok untuk setiap hidangan.', 'photo' => 'photo-1556679343-c7306c1976bc'],
-            ['name' => 'Lemon Tea', 'category' => 'Minuman', 'price' => 8000, 'description' => 'Teh lemon yang ringan dan menyegarkan.', 'photo' => 'photo-1556679343-c7306c1976bc'],
+            'ayam-sambal-gami' => [
+                'name' => 'Ayam Sambal Gami',
+                'category' => 'gami-spesial',
+                'price' => 22000,
+                'description' => 'Ayam gurih dengan sambal gami panas khas Banjar.',
+                'image' => 'images/template/photo-1547592180-85f173990554.jpg',
+                'is_featured' => true,
+            ],
+            'bebek-gami' => [
+                'name' => 'Bebek Gami',
+                'category' => 'gami-spesial',
+                'price' => 35000,
+                'description' => 'Bebek empuk dengan sambal gami yang pedas dan wangi.',
+                'image' => 'images/template/photo-1544025162-d76694265947.jpg',
+            ],
+            'udang-sambal-gami' => [
+                'name' => 'Udang Sambal Gami',
+                'category' => 'gami-spesial',
+                'price' => 35000,
+                'description' => 'Udang segar dengan sambal gami pedas aromatik.',
+                'image' => 'images/template/photo-1565680018434-b513d5e5fd47.jpg',
+                'is_featured' => true,
+            ],
+            'nila-gami' => [
+                'name' => 'Nila Gami',
+                'category' => 'gami-spesial',
+                'price' => 25000,
+                'description' => 'Ikan nila dengan sambal gami gurih dan pedas.',
+                'image' => 'images/template/photo-1515003197210-e0cd71810b5f.jpg',
+            ],
+            'iga-bakar-saus-bbq' => [
+                'name' => 'Iga Bakar Saus BBQ',
+                'category' => 'iga-sapi',
+                'price' => 50000,
+                'description' => 'Iga sapi bakar dengan saus BBQ yang manis gurih.',
+                'image' => 'images/template/photo-1544025162-d76694265947.jpg',
+            ],
+            'sapi-lada-hitam' => [
+                'name' => 'Sapi Lada Hitam',
+                'category' => 'iga-sapi',
+                'price' => 50000,
+                'description' => 'Daging sapi dengan lada hitam dan saus gurih.',
+                'image' => 'images/template/photo-1558030006-450675393462.jpg',
+            ],
+            'ayam-bakar-madu' => [
+                'name' => 'Ayam Bakar Madu',
+                'category' => 'ayam',
+                'price' => 18000,
+                'description' => 'Ayam bakar dengan sentuhan madu yang manis gurih.',
+                'image' => 'images/template/photo-1532550907401-a500c9a57435.jpg',
+            ],
+            'ayam-rica-rica' => [
+                'name' => 'Ayam Rica-Rica',
+                'category' => 'ayam',
+                'price' => 25000,
+                'description' => 'Pedas aromatik dengan bumbu yang meresap.',
+                'image' => 'images/template/photo-1604908176997-125f25cc6f3d.jpg',
+            ],
+            'ayam-kampung-goreng' => [
+                'name' => 'Ayam Kampung Goreng',
+                'category' => 'ayam-kampung',
+                'price' => 25000,
+                'description' => 'Ayam kampung goreng dengan tekstur gurih.',
+                'image' => 'images/template/photo-1562967914-608f82629710.jpg',
+            ],
+            'ayam-kampung-kecap' => [
+                'name' => 'Ayam Kampung Kecap',
+                'category' => 'ayam-kampung',
+                'price' => 35000,
+                'description' => 'Manis gurih, cocok untuk makan bersama.',
+                'image' => 'images/template/photo-1601050690597-df0568f70950.jpg',
+            ],
+            'bebek-goreng' => [
+                'name' => 'Bebek Goreng',
+                'category' => 'bebek',
+                'price' => 30000,
+                'description' => 'Bebek goreng gurih dengan tekstur renyah.',
+                'image' => 'images/template/photo-1598514983318-2f64f8f4796c.jpg',
+                'is_featured' => true,
+            ],
+            'bebek-rica-rica' => [
+                'name' => 'Bebek Rica-Rica',
+                'category' => 'bebek',
+                'price' => 35000,
+                'description' => 'Bebek dengan rica-rica pedas yang kaya rempah.',
+                'image' => 'images/template/photo-1544025162-d76694265947.jpg',
+            ],
+            'udang-bakar' => [
+                'name' => 'Udang Bakar',
+                'category' => 'seafood',
+                'price' => 35000,
+                'description' => 'Udang segar dibakar dengan bumbu gurih manis.',
+                'image' => 'images/template/photo-1565680018434-b513d5e5fd47.jpg',
+            ],
+            'cumi-saus-padang' => [
+                'name' => 'Cumi Saus Padang',
+                'category' => 'seafood',
+                'price' => 45000,
+                'description' => 'Cumi dengan saus pedas gurih yang kaya rasa.',
+                'image' => 'images/template/photo-1565299507177-b0ac66763828.jpg',
+            ],
+            'gurame-bakar' => [
+                'name' => 'Gurame Bakar',
+                'category' => 'ikan',
+                'price' => 75000,
+                'description' => 'Gurame bakar dengan bumbu khas yang kaya rasa.',
+                'image' => 'images/template/photo-1515003197210-e0cd71810b5f.jpg',
+                'is_featured' => true,
+            ],
+            'nila-bakar' => [
+                'name' => 'Nila Bakar',
+                'category' => 'ikan',
+                'price' => 25000,
+                'description' => 'Ikan nila bakar dengan bumbu gurih.',
+                'image' => 'images/template/photo-1515003197210-e0cd71810b5f.jpg',
+            ],
+            'cah-pakcoy-saus-tiram' => [
+                'name' => 'Cah Pakcoy Saus Tiram',
+                'category' => 'sayuran',
+                'price' => 18000,
+                'description' => 'Pakcoy segar dengan saus tiram gurih.',
+                'image' => 'images/template/photo-1512621776951-a57141f2eefd.jpg',
+            ],
+            'genjer-cah-pedas' => [
+                'name' => 'Genjer Cah Pedas',
+                'category' => 'sayuran',
+                'price' => 13000,
+                'description' => 'Tumis genjer pedas dengan rasa segar.',
+                'image' => 'images/template/photo-1512621776951-a57141f2eefd.jpg',
+            ],
+            'nasi-goreng-ayam' => [
+                'name' => 'Nasi Goreng Ayam',
+                'category' => 'nasi',
+                'price' => 18000,
+                'description' => 'Nasi goreng gurih dengan topping ayam.',
+                'image' => 'images/template/photo-1603133872878-684f208fb84b.jpg',
+            ],
+            'nasi-goreng-seafood' => [
+                'name' => 'Nasi Goreng Seafood',
+                'category' => 'nasi',
+                'price' => 20000,
+                'description' => 'Nasi goreng dengan seafood pilihan.',
+                'image' => 'images/template/photo-1603133872878-684f208fb84b.jpg',
+            ],
+            'es-teh-manis' => [
+                'name' => 'Es Teh Manis',
+                'category' => 'minuman',
+                'price' => 5000,
+                'description' => 'Segar dan cocok untuk setiap hidangan.',
+                'image' => 'images/template/photo-1556679343-c7306c1976bc.jpg',
+            ],
+            'lemon-tea' => [
+                'name' => 'Lemon Tea',
+                'category' => 'minuman',
+                'price' => 8000,
+                'description' => 'Teh lemon yang ringan dan menyegarkan.',
+                'image' => 'images/template/photo-1556679343-c7306c1976bc.jpg',
+            ],
         ];
 
-        foreach ($items as $index => $item) {
-            if (MenuItem::query()->where('name', $item['name'])->exists()) {
-                continue;
-            }
+        foreach (array_keys($items) as $index => $key) {
+            $item = $items[$key];
+            $menu = MenuItem::query()->where('seed_key', $key)->first()
+                ?? MenuItem::query()->firstOrNew(['name' => $item['name']]);
 
-            $source = public_path('images/template/'.$item['photo'].'.jpg');
-            $imagePath = 'menu/examples/'.Str::slug($item['name']).'.jpg';
-
-            if (is_file($source)) {
-                Storage::disk('public')->put($imagePath, File::get($source));
-            }
-
-            unset($item['photo']);
-
-            MenuItem::query()->create([
-                ...$item,
-                'image_path' => is_file($source) ? $imagePath : null,
+            $menu->forceFill([
                 'is_published' => true,
                 'is_available' => true,
-                'is_featured' => in_array($item['name'], ['Ayam Sambal Gami', 'Bebek Goreng', 'Udang Sambal Gami', 'Gurame Bakar']),
+                'is_featured' => false,
                 'sort_order' => $index + 1,
-            ]);
+                ...Arr::except($item, ['category', 'image']),
+                'seed_key' => $key,
+                'category_id' => $categories[$item['category']],
+                'image_path' => $item['image'],
+            ])->save();
         }
     }
 }

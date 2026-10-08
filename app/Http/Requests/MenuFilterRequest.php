@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\MenuItem;
+use App\Models\MenuCategory;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -13,7 +13,7 @@ class MenuFilterRequest extends FormRequest
     {
         return [
             'search' => ['nullable', 'string', 'max:120'],
-            'category' => ['nullable', Rule::in(MenuItem::CATEGORIES)],
+            'category' => ['nullable', 'string', Rule::exists(MenuCategory::class, 'name')],
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\MenuCategory;
 use App\Models\MenuItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -13,7 +14,7 @@ class MenuItemFactory extends Factory
     {
         return [
             'name' => fake()->words(3, true),
-            'category' => 'Ayam',
+            'category_id' => MenuCategory::factory(),
             'description' => fake()->sentence(),
             'price' => 25000,
             'is_published' => true,

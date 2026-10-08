@@ -1,10 +1,17 @@
-import { Form, Head, Link, router } from '@inertiajs/react';
-import { Clock, RotateCcw, Search, Soup } from 'lucide-react';
+import { Form, Head, Link } from '@inertiajs/react';
+import { Search, Soup } from 'lucide-react';
 import MenuCard from '@/components/menu-card';
 import BakoelPagination from '@/components/bakoel-pagination';
+import PublicPageHeading from '@/components/public-page-heading';
+import InputError from '@/components/input-error';
 import PublicLayout from '@/layouts/public-layout';
 import { menu } from '@/routes';
-import type { Contact, MenuItem, Paginated } from '@/types/bakoel';
+import type {
+    Contact,
+    MenuCategory,
+    MenuItem,
+    Paginated,
+} from '@/types/bakoel';
 
 export default function MenuPage({
     contact,
@@ -14,7 +21,7 @@ export default function MenuPage({
 }: {
     contact: Contact;
     items: Paginated<MenuItem>;
-    categories: string[];
+    categories: MenuCategory[];
     filters: { search?: string; category?: string };
 }) {
     return (
@@ -22,118 +29,104 @@ export default function MenuPage({
             <Head title="Menu">
                 <meta
                     name="description"
-                    content="Katalog menu Bakoel Banjar: gami, ayam, bebek, seafood, ikan, sayuran, nasi, dan minuman."
+                    content="Lihat pilihan menu dan harga Bakoel Banjar. Temukan hidangan favoritmu dan pesan melalui WhatsApp."
                 />
             </Head>
-            <section className="noise border-b border-[var(--bb-line)]">
-                <div className="bb-container py-14 lg:py-20">
-                    <div className="grid items-end gap-10 lg:grid-cols-[1fr_auto]">
-                        <div>
-                            <p className="bb-eyebrow mb-5 inline-flex rounded-full border border-[var(--bb-line)] bg-[var(--bb-card)] px-3 py-2">
-                                Katalog Menu
-                            </p>
-                            <h1 className="max-w-4xl font-display text-5xl leading-[.98] font-bold tracking-[-.04em] md:text-6xl lg:text-7xl">
-                                Pilih rasa yang paling ingin kamu nikmati hari
-                                ini.
-                            </h1>
-                            <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--bb-muted)] md:text-lg">
-                                Dari ayam kampung, bebek, seafood, ikan,
-                                sayuran, hingga minuman — semua disajikan dengan
-                                karakter rasa khas Bakoel Banjar.
-                            </p>
-                        </div>
-                        <div className="flex items-center gap-3 rounded-2xl border border-[var(--bb-line)] bg-[var(--bb-card)] p-5">
-                            <Clock className="size-10 rounded-xl bg-[var(--bb-tint)] p-2" />
-                            <div>
-                                <p className="text-sm font-semibold">
-                                    Temukan menu favorit
-                                </p>
-                                <p className="mt-1 text-xs text-[var(--bb-muted)]">
-                                    Dine in · Take Away · Delivery
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <Form
-                        {...menu.form()}
-                        className="mt-10 flex flex-wrap gap-3"
-                    >
-                        <div className="relative min-w-48 flex-1">
-                            <Search
-                                size={20}
-                                className="absolute top-4 left-4 text-[var(--bb-muted)]"
-                            />
+            <PublicPageHeading
+                label="Menu Bakoel"
+                title="Mau makan apa hari ini?"
+                description="Pilih lauk, pelengkap, dan minuman favoritmu. Pesan langsung lewat WhatsApp."
+            />
+            <section className="bb-container pb-12">
+                <Form
+                    {...menu.form()}
+                    className="mb-5 flex max-w-xl flex-wrap gap-2"
+                >
+                    {({ processing, errors }) => (
+                        <>
                             <input
                                 type="hidden"
                                 name="category"
                                 value={filters.category || ''}
                             />
-                            <input
-                                aria-label="Cari nama menu"
-                                type="search"
-                                name="search"
-                                defaultValue={filters.search}
-                                key={filters.search}
-                                maxLength={120}
-                                placeholder="Cari menu, misalnya ayam gami, bebek, udang..."
-                                className="w-full rounded-2xl border border-[var(--bb-line)] bg-[var(--bb-card)] py-4 pr-4 pl-12 text-sm"
-                            />
-                        </div>
-                        <button type="submit" className="bb-button">
-                            Cari menu
-                        </button>
-                        <Link
-                            href={menu()}
-                            className="bb-button bb-button-outline"
-                        >
-                            <RotateCcw size={16} />
-                            Reset
-                        </Link>
-                    </Form>
-                </div>
-            </section>
-            <section className="sticky top-[76px] z-20 border-b border-[var(--bb-line)] bg-[var(--bb-paper)]/95 backdrop-blur-xl">
-                <div
-                    className="bb-container flex gap-2 overflow-x-auto py-4"
+                            <div className="relative min-w-40 flex-1">
+                                <Search
+                                    size={17}
+                                    className="absolute top-3.5 left-3.5 text-[var(--bb-muted)]"
+                                />
+                                <input
+                                    aria-label="Cari nama menu"
+                                    type="search"
+                                    name="search"
+                                    defaultValue={filters.search}
+                                    key={filters.search || ''}
+                                    maxLength={120}
+                                    placeholder="Cari nama menu..."
+                                    className="h-11 w-full rounded-lg border border-[var(--bb-line)] bg-[var(--bb-card)] pr-3 pl-10 text-sm"
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                disabled={processing}
+                                className="bb-button"
+                            >
+                                {processing ? 'Mencari...' : 'Cari'}
+                            </button>
+                            {(filters.search || filters.category) && (
+                                <Link
+                                    href={menu()}
+                                    className="bb-button bb-button-outline"
+                                >
+                                    Reset
+                                </Link>
+                            )}
+                            <div className="w-full">
+                                <InputError
+                                    message={errors.search || errors.category}
+                                />
+                            </div>
+                        </>
+                    )}
+                </Form>
+                <nav
                     aria-label="Kategori menu"
+                    className="flex flex-wrap gap-2 border-b border-[var(--bb-line)] pb-6"
                 >
-                    {['Semua Menu', ...categories].map((category) => (
-                        <button
-                            type="button"
-                            key={category}
-                            onClick={() =>
-                                router.get(
-                                    menu.url(),
-                                    {
-                                        search: filters.search || '',
-                                        category:
-                                            category === 'Semua Menu'
-                                                ? ''
-                                                : category,
-                                    },
-                                    { preserveScroll: true },
-                                )
+                    <Link
+                        href={menu({ query: { search: filters.search || '' } })}
+                        preserveScroll
+                        aria-current={!filters.category ? 'true' : undefined}
+                        className={`bb-category ${!filters.category ? 'bb-category-active' : ''}`}
+                    >
+                        Semua
+                    </Link>
+                    {categories.map((category) => (
+                        <Link
+                            key={category.id}
+                            href={menu({
+                                query: {
+                                    search: filters.search || '',
+                                    category: category.name,
+                                },
+                            })}
+                            preserveScroll
+                            aria-current={
+                                filters.category === category.name
+                                    ? 'true'
+                                    : undefined
                             }
-                            aria-pressed={
-                                (filters.category || 'Semua Menu') === category
-                            }
-                            className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold ${(filters.category || 'Semua Menu') === category ? 'border-banjar-700 bg-banjar-700 text-white' : 'border-[var(--bb-line)] bg-[var(--bb-card)] text-[var(--bb-muted)] hover:text-[var(--bb-ink)]'}`}
+                            className={`bb-category ${filters.category === category.name ? 'bb-category-active' : ''}`}
                         >
-                            {category}
-                        </button>
+                            {category.name}
+                        </Link>
                     ))}
-                </div>
-            </section>
-            <section className="bb-container py-14">
-                <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-                    <div>
-                        <p className="bb-eyebrow">Pilihan menu</p>
-                        <h2 className="mt-2 font-display text-4xl font-bold tracking-tight">
-                            {filters.category || 'Semua Menu'}
-                        </h2>
-                    </div>
-                    <p className="text-sm text-[var(--bb-muted)]">
-                        {items.total} menu ditemukan
+                </nav>
+                <div className="flex flex-wrap items-center justify-between gap-3 py-6">
+                    <h2 className="text-base font-semibold">
+                        {filters.category || 'Semua menu'}
+                    </h2>
+                    <p className="text-xs text-[var(--bb-muted)]" role="status">
+                        {items.total} menu
                         {filters.search ? ` untuk “${filters.search}”` : ''}
                     </p>
                 </div>
@@ -148,21 +141,21 @@ export default function MenuPage({
                         ))}
                     </div>
                 ) : (
-                    <div className="rounded-xl border border-dashed border-[var(--bb-line)] py-20 text-center">
+                    <div className="rounded-lg border border-dashed border-[var(--bb-line)] px-5 py-14 text-center">
                         <Soup
-                            className="mx-auto mb-5"
-                            size={36}
-                            strokeWidth={1.2}
+                            className="mx-auto text-[var(--bb-gold)]"
+                            size={30}
+                            strokeWidth={1.5}
                         />
-                        <h2 className="font-serif text-3xl">
-                            Belum ada menu yang cocok.
-                        </h2>
-                        <p className="mt-3 text-sm text-[var(--bb-muted)]">
+                        <h3 className="mt-4 text-lg font-semibold">
+                            Menu belum ditemukan
+                        </h3>
+                        <p className="mt-2 text-sm text-[var(--bb-muted)]">
                             Coba kata kunci atau kategori lainnya.
                         </p>
                         <Link
                             href={menu()}
-                            className="mt-6 inline-block underline"
+                            className="mt-5 inline-block text-sm underline underline-offset-4"
                         >
                             Lihat semua menu
                         </Link>

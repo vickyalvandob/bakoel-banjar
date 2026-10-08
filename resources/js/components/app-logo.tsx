@@ -1,15 +1,12 @@
-import { Soup } from 'lucide-react';
+import { Store } from 'lucide-react';
 
 export default function AppLogo() {
     return (
         <>
-            <div className="flex aspect-square size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-                <Soup className="size-5" />
-            </div>
-            <div className="ml-1 grid flex-1 text-left text-sm">
-                <span className="mb-0.5 truncate leading-tight font-semibold">
-                    Bakoel Banjar
-                </span>
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground"><Store className="size-5" strokeWidth={1.6} /></div>
+            <div className="ml-1 grid flex-1 gap-0.5 text-left group-data-[collapsible=icon]:hidden">
+                <span className="truncate text-sm font-semibold">Bakoel Banjar</span>
+                <span className="text-[11px] text-muted-foreground">Pengelola website</span>
             </div>
         </>
     );

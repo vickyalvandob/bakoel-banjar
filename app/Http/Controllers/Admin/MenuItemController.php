@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MenuFilterRequest;
+use App\Http\Requests\AdminMenuFilterRequest;
 use App\Http\Requests\MenuItemRequest;
+use App\Models\MenuCategory;
 use App\Models\MenuItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
@@ -14,22 +15,25 @@ use Throwable;
 
 class MenuItemController extends Controller
 {
-    public function index(MenuFilterRequest $request): Response
+    public function index(AdminMenuFilterRequest $request): Response
     {
         return Inertia::render('admin/menu/index', [
-            'items' => MenuItem::query()
+            'items' => MenuItem::query()->with('category')
+                ->when($request->input('status') === 'published', fn ($query) => $query->where('is_published', true))
+                ->when($request->input('status') === 'draft', fn ($query) => $query->where('is_published', false))
+                ->when($request->input('status') === 'unavailable', fn ($query) => $query->where('is_available', false))
                 ->when($request->filled('search'), fn ($query) => $query->where('name', 'like', '%'.$request->string('search').'%'))
-                ->when($request->filled('category'), fn ($query) => $query->where('category', $request->string('category')))
+                ->when($request->filled('category'), fn ($query) => $query->whereHas('category', fn ($category) => $category->where('name', $request->string('category'))))
                 ->orderBy('sort_order')->orderBy('id')->paginate(15)->withQueryString()
                 ->through(fn (MenuItem $item) => [...$item->publicData(), 'is_published' => $item->is_published, 'sort_order' => $item->sort_order]),
-            'categories' => MenuItem::CATEGORIES,
-            'filters' => $request->only('search', 'category'),
+            'categories' => MenuCategory::query()->orderBy('sort_order')->orderBy('id')->get(['id', 'name']),
+            'filters' => $request->only('search', 'category', 'status'),
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('admin/menu/form', ['item' => null, 'categories' => MenuItem::CATEGORIES]);
+        return Inertia::render('admin/menu/form', ['item' => null, 'categories' => MenuCategory::query()->orderBy('sort_order')->orderBy('id')->get(['id', 'name'])]);
     }
 
     public function store(MenuItemRequest $request): RedirectResponse
@@ -43,7 +47,7 @@ class MenuItemController extends Controller
     {
         return Inertia::render('admin/menu/form', [
             'item' => [...$menu->publicData(), 'is_published' => $menu->is_published, 'sort_order' => $menu->sort_order],
-            'categories' => MenuItem::CATEGORIES,
+            'categories' => MenuCategory::query()->orderBy('sort_order')->orderBy('id')->get(['id', 'name']),
         ]);
     }
 
