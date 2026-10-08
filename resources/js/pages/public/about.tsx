@@ -22,7 +22,7 @@ export default function About({ contact }: { contact: Contact }) {
             <section className="bb-container grid items-center gap-8 pb-12 md:grid-cols-2 md:gap-14">
                 <figure>
                     <img
-                        src="/images/template/photo-1498654896293-37aacf113fd9.jpg"
+                        src="/images/Bakoel Banjar Family Feast.png"
                         alt="Menyiapkan hidangan untuk makan bersama"
                         width={1200}
                         height={800}

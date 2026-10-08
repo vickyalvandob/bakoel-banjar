@@ -56,7 +56,7 @@ export default function Home({
                 </div>
                 <figure>
                     <img
-                        src="/images/Bakoel Banjar Spicy Seafood Feast.png"
+                        src="/images/Bakoel Banjar Spicy Seafood Feast.webp"
                         alt="Hidangan nasi dan lauk untuk dinikmati bersama"
                         width={1400}
                         height={932}

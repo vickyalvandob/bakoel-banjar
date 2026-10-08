@@ -20,9 +20,6 @@ export default function BakoelBrand({
                     <span className="block text-base font-semibold tracking-tight">
                         Bakoel Banjar
                     </span>
-                    <span className="mt-0.5 block text-[10px] tracking-wide opacity-65">
-                        Masakan Khas Banjar
-                    </span>
                 </span>
             )}
         </span>
