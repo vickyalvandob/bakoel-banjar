@@ -3,6 +3,7 @@ import { ArrowUpRight, Menu, MessageCircle, X } from 'lucide-react';
 import { useState } from 'react';
 import type { PropsWithChildren } from 'react';
 import BakoelBrand from '@/components/bakoel-brand';
+import SiteHead from '@/components/site-head';
 import {
     about,
     contact as contactRoute,
@@ -61,6 +62,7 @@ export default function PublicLayout({
 
     return (
         <div className="bb-public flex min-h-screen flex-col bg-[var(--bb-paper)] text-[var(--bb-ink)]">
+            <SiteHead />
             <a
                 href="#main-content"
                 className="sr-only z-50 bg-banjar-700 p-3 text-white focus:not-sr-only focus:fixed"
@@ -146,7 +148,7 @@ export default function PublicLayout({
                             <BakoelBrand />
                         </Link>
                         <p className="mt-4 max-w-xs text-sm leading-6 text-[var(--bb-muted)]">
-                            Rasa yang akrab, untuk dinikmati bersama.
+                           Nikmati aneka hidangan khas Nusantara di Bakoel Banjar. Tersedia ayam kampung, bebek, sambal gami, seafood, dan menu pilihan.
                         </p>
                     </div>
                     <div className="text-sm leading-6">
@@ -182,9 +184,6 @@ export default function PublicLayout({
                 </div>
                 <div className="bb-container flex flex-wrap justify-between gap-3 border-t border-[var(--bb-line)] py-5 text-xs text-[var(--bb-muted)]">
                     <span>© {new Date().getFullYear()} Bakoel Banjar</span>
-                    <Link href={login()} className="hover:text-[var(--bb-ink)]">
-                        Masuk pengelola
-                    </Link>
                 </div>
             </footer>
         </div>

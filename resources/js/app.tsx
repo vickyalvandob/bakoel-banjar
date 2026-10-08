@@ -9,7 +9,8 @@ import SettingsLayout from '@/layouts/settings/layout';
 const appName = 'Bakoel Banjar';
 
 void createInertiaApp({
-    title: (title) => (title ? `${title} - ${appName}` : appName),
+    title: (title, page) =>
+        page.props.seo ? title : title ? `${title} - ${appName}` : appName,
     layout: (name) => {
         switch (true) {
             case name === 'welcome' || name.startsWith('public/'):

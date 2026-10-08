@@ -1,8 +1,26 @@
+import { usePage } from '@inertiajs/react';
+
 export default function BakoelBrand({
     compact = false,
 }: {
     compact?: boolean;
 }) {
+    const { site } = usePage().props;
+
+    if (site.logo_url) {
+        return (
+            <img
+                src={site.logo_url}
+                alt="Bakoel Banjar"
+                className={
+                    compact
+                        ? 'size-9 object-contain'
+                        : 'h-20 w-auto max-w-44 object-contain'
+                }
+            />
+        );
+    }
+
     return (
         <span className="inline-flex items-center gap-3">
             <span className="grid size-9 shrink-0 place-items-center rounded-lg border border-current/15">

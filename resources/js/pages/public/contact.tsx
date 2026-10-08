@@ -1,4 +1,3 @@
-import { Head } from '@inertiajs/react';
 import {
     ArrowUpRight,
     Clock,
@@ -39,12 +38,6 @@ export default function ContactPage({ contact }: { contact: Contact }) {
 
     return (
         <PublicLayout contact={contact}>
-            <Head title="Kontak">
-                <meta
-                    name="description"
-                    content="Hubungi Bakoel Banjar melalui WhatsApp, lihat alamat, jam operasional, dan petunjuk lokasi."
-                />
-            </Head>
             <PublicPageHeading
                 label="Kontak"
                 title="Mari, mampir atau sapa kami."

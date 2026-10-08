@@ -1,4 +1,5 @@
 import AuthLayoutTemplate from '@/layouts/auth/auth-simple-layout';
+import SiteHead from '@/components/site-head';
 
 export default function AuthLayout({
     title = '',
@@ -11,6 +12,7 @@ export default function AuthLayout({
 }) {
     return (
         <AuthLayoutTemplate title={title} description={description}>
+            <SiteHead />
             {children}
         </AuthLayoutTemplate>
     );

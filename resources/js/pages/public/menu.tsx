@@ -1,4 +1,4 @@
-import { Form, Head, Link } from '@inertiajs/react';
+import { Form, Link } from '@inertiajs/react';
 import { Search, Soup } from 'lucide-react';
 import MenuCard from '@/components/menu-card';
 import BakoelPagination from '@/components/bakoel-pagination';
@@ -26,12 +26,6 @@ export default function MenuPage({
 }) {
     return (
         <PublicLayout contact={contact}>
-            <Head title="Menu">
-                <meta
-                    name="description"
-                    content="Lihat pilihan menu dan harga Bakoel Banjar. Temukan hidangan favoritmu dan pesan melalui WhatsApp."
-                />
-            </Head>
             <PublicPageHeading
                 label="Menu Bakoel"
                 title="Mau makan apa hari ini?"

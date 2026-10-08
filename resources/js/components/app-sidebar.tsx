@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { Globe, LayoutGrid, MapPin, Soup, Tags } from 'lucide-react';
+import { Globe, LayoutGrid, MapPin, Settings, Soup, Tags } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -18,6 +18,7 @@ import { dashboard } from '@/routes/admin';
 import { index } from '@/routes/admin/menu';
 import { index as categoriesIndex } from '@/routes/admin/categories';
 import { edit } from '@/routes/admin/contact';
+import { edit as settingsEdit } from '@/routes/admin/settings';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -29,6 +30,7 @@ const mainNavItems: NavItem[] = [
     { title: 'Kelola menu', href: index(), icon: Soup },
     { title: 'Kategori menu', href: categoriesIndex(), icon: Tags },
     { title: 'Informasi kontak', href: edit(), icon: MapPin },
+    { title: 'Pengaturan website', href: settingsEdit(), icon: Settings },
 ];
 
 const footerNavItems: NavItem[] = [

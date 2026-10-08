@@ -1,3 +1,27 @@
+export type SiteImageField =
+    | 'logo'
+    | 'favicon'
+    | 'meta_image'
+    | 'home_image'
+    | 'about_image';
+
+export type SiteSettings = {
+    meta_title: string | null;
+    meta_description: string | null;
+    logo_url: string | null;
+    favicon_url: string;
+    meta_image_url: string;
+    home_image_url: string;
+    about_image_url: string;
+};
+
+export type SiteSeo = {
+    title: string;
+    description: string;
+    image: string;
+    url: string;
+};
+
 export type Contact = {
     address: string | null;
     whatsapp: string | null;

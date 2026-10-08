@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -35,8 +36,27 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $site = SiteSetting::current()->publicData();
+        $pageTitle = match ($request->route()?->getName()) {
+            'home' => 'Beranda',
+            'menu' => 'Menu',
+            'services' => 'Layanan',
+            'about' => 'Tentang',
+            'contact' => 'Kontak',
+            default => null,
+        };
+
         return [
             ...parent::share($request),
+            'site' => $site,
+            'seo' => $pageTitle ? [
+                'title' => $request->routeIs('home') && $site['meta_title']
+                    ? $site['meta_title']
+                    : $pageTitle.' - '.($site['meta_title'] ?: 'Bakoel Banjar'),
+                'description' => $site['meta_description'] ?: 'Temukan menu Bakoel Banjar, lihat harga, dan pesan langsung melalui WhatsApp. Hidangan untuk makan sehari-hari dan bersama keluarga.',
+                'image' => $site['meta_image_url'],
+                'url' => $request->url(),
+            ] : null,
             'name' => config('app.name'),
             'flash' => ['success' => fn () => $request->session()->get('success')],
             'auth' => [

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ContactSettingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuCategoryController;
 use App\Http\Controllers\Admin\MenuItemController;
+use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\PublicSiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'can:manage-content'
     Route::resource('categories', MenuCategoryController::class)->only(['index', 'store', 'update', 'destroy']);
     Route::get('kontak', [ContactSettingController::class, 'edit'])->name('contact.edit');
     Route::put('kontak', [ContactSettingController::class, 'update'])->name('contact.update');
+    Route::get('settings', [SiteSettingController::class, 'edit'])->name('settings.edit');
+    Route::put('settings', [SiteSettingController::class, 'update'])->name('settings.update');
 });
 
 require __DIR__.'/settings.php';

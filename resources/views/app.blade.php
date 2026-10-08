@@ -30,14 +30,25 @@
             }
         </style>
 
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-
         @fonts
 
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
         <x-inertia::head>
-            <title>Bakoel Banjar</title>
+            <title data-inertia>{{ $page['props']['seo']['title'] ?? 'Bakoel Banjar' }}</title>
+            <link data-inertia="favicon" rel="icon" href="{{ $page['props']['site']['favicon_url'] ?? asset('favicon.svg') }}">
+            @if($page['props']['seo'] ?? null)
+                <meta data-inertia="description" name="description" content="{{ $page['props']['seo']['description'] }}">
+                <meta data-inertia="og:type" property="og:type" content="website">
+                <meta data-inertia="og:title" property="og:title" content="{{ $page['props']['seo']['title'] }}">
+                <meta data-inertia="og:description" property="og:description" content="{{ $page['props']['seo']['description'] }}">
+                <meta data-inertia="og:image" property="og:image" content="{{ $page['props']['seo']['image'] }}">
+                <meta data-inertia="og:url" property="og:url" content="{{ $page['props']['seo']['url'] }}">
+                <meta data-inertia="twitter:card" name="twitter:card" content="summary_large_image">
+                <meta data-inertia="twitter:title" name="twitter:title" content="{{ $page['props']['seo']['title'] }}">
+                <meta data-inertia="twitter:description" name="twitter:description" content="{{ $page['props']['seo']['description'] }}">
+                <meta data-inertia="twitter:image" name="twitter:image" content="{{ $page['props']['seo']['image'] }}">
+            @endif
         </x-inertia::head>
     </head>
     <body class="font-sans antialiased">

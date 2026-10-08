@@ -1,4 +1,3 @@
-import { Head } from '@inertiajs/react';
 import { ShoppingBag, Users, Utensils } from 'lucide-react';
 import PublicPageHeading from '@/components/public-page-heading';
 import PublicLayout, { ContactButton } from '@/layouts/public-layout';
@@ -7,12 +6,6 @@ import type { Contact } from '@/types/bakoel';
 export default function Services({ contact }: { contact: Contact }) {
     return (
         <PublicLayout contact={contact}>
-            <Head title="Layanan">
-                <meta
-                    name="description"
-                    content="Makan di tempat, bawa pulang, atau pesan untuk acara. Hubungi Bakoel Banjar untuk pilihan menu dan ketersediaan."
-                />
-            </Head>
             <PublicPageHeading
                 label="Layanan"
                 title="Untuk makanmu. Untuk acaramu."

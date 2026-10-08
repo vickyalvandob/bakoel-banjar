@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { ArrowRight, MapPin, ShoppingBag, Utensils, Users } from 'lucide-react';
 import MenuCard from '@/components/menu-card';
 import PublicLayout, { ContactButton } from '@/layouts/public-layout';
@@ -12,14 +12,9 @@ export default function Home({
     contact: Contact;
     featured: MenuItem[];
 }) {
+    const { site } = usePage().props;
     return (
         <PublicLayout contact={contact}>
-            <Head title="Beranda">
-                <meta
-                    name="description"
-                    content="Temukan menu Bakoel Banjar, lihat harga, dan pesan langsung melalui WhatsApp. Hidangan untuk makan sehari-hari dan bersama keluarga."
-                />
-            </Head>
             <section className="bb-container grid items-center gap-8 py-10 sm:py-14 lg:grid-cols-2 lg:gap-16 lg:py-16">
                 <div>
                     <p className="bb-eyebrow">
@@ -56,7 +51,7 @@ export default function Home({
                 </div>
                 <figure>
                     <img
-                        src="/images/Bakoel Banjar Spicy Seafood Feast.webp"
+                        src={site.home_image_url}
                         alt="Hidangan nasi dan lauk untuk dinikmati bersama"
                         width={1400}
                         height={932}

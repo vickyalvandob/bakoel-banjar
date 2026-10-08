@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { ArrowRight } from 'lucide-react';
 import PublicPageHeading from '@/components/public-page-heading';
 import PublicLayout from '@/layouts/public-layout';
@@ -6,14 +6,9 @@ import { menu, contact as contactRoute } from '@/routes';
 import type { Contact } from '@/types/bakoel';
 
 export default function About({ contact }: { contact: Contact }) {
+    const { site } = usePage().props;
     return (
         <PublicLayout contact={contact}>
-            <Head title="Tentang">
-                <meta
-                    name="description"
-                    content="Kenali Bakoel Banjar dan pilihan hidangan untuk makan sehari-hari maupun dinikmati bersama."
-                />
-            </Head>
             <PublicPageHeading
                 label="Tentang Bakoel Banjar"
                 title="Sederhana sajiannya. Hangat kebersamaannya."
@@ -22,7 +17,7 @@ export default function About({ contact }: { contact: Contact }) {
             <section className="bb-container grid items-center gap-8 pb-12 md:grid-cols-2 md:gap-14">
                 <figure>
                     <img
-                        src="/images/Bakoel Banjar Family Feast.png"
+                        src={site.about_image_url}
                         alt="Menyiapkan hidangan untuk makan bersama"
                         width={1200}
                         height={800}
